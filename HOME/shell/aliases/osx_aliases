@@ -1,0 +1,20 @@
+#Generate aliases to Applications
+## example /Applications/Adium.app/Contents/MacOS/Adium
+for i in /Applications/*.app;do
+	soft=${i##*/}
+	soft=${soft%\.app}
+	lsoft=`echo $soft|perl -pe 'print lc($_);exit;'`
+	soft=${soft/ /\\ }
+	lsoft=${lsoft/ /\\ }
+	if [ -x "$i/Contents/MacOS/$soft" ];then
+		echo "alias $soft='$i/Contents/MacOS/$soft'">>$ZTMP
+		echo "alias $lsoft='$i/Contents/MacOS/$soft'">>$ZTMP
+		#eval "alias $soft='$i/Contents/MacOS/$soft'"
+		#eval "alias $lsoft='$i/Contents/MacOS/$soft'"
+	elif [ -x "$i/Contents/MacOS/$lsoft" ];then
+		echo "alias $lsoft='$i/Contents/MacOS/$lsoft'">>$ZTMP
+		echo "alias $soft='$i/Contents/MacOS/$lsoft'">>$ZTMP
+		#eval "alias $lsoft='$i/Contents/MacOS/$lsoft'"
+		#eval "alias $soft='$i/Contents/MacOS/$lsoft'"
+	fi
+done

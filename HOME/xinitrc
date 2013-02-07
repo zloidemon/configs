@@ -1,0 +1,76 @@
+#!/bin/sh
+
+OSTYPE=`uname -s`
+
+userresources=$HOME/.Xresources
+usermodmap=$HOME/.Xmodmap
+
+if [ $OSTYPE = "FreeBSD" ];then
+	sysresources=/usr/X11R6/lib/X11/xinit/.Xresources
+	sysmodmap=/usr/X11R6/lib/X11/xinit/.Xmodmap
+elif [ $OSTYPE = "Linux" ];then
+	if [ -f /etc/gentoo-release ];then
+	#For Gentoo Linux
+		sysresources=/etc/X11/xinit/Xresources
+		sysmodmap=/etc/X11/xinit/Xmodmap
+		TZ='Asia/Krasnoyarsk';export TZ
+	else
+		echo "ech..."
+		exit 0
+	fi
+else
+	echo "ech..."
+	exit 0
+fi
+
+# merge in defaults and keymaps
+
+export LC_ALL=ru_RU.UTF-8
+export LC_CTYPE=ru_RU.UTF-8
+
+if [ -f $sysresources ]; then
+    xrdb -merge $sysresources
+fi
+
+if [ -f $sysmodmap ]; then
+    xmodmap $sysmodmap
+fi
+
+if [ -f $userresources ]; then
+    xrdb -merge $userresources
+fi
+
+if [ -f $usermodmap ]; then
+    xmodmap $usermodmap
+fi
+
+# start some nice programs
+
+#xscreensaver -lock-timeout 3 &
+#tkremind&
+#xv -quit -root ~/ctwm-themes/du/redbg.png
+#xlogo -fg gray80 -bg gray80 -g 1152x24+0-0 &
+#xload -hl black -bg gray80 -geometry 32x24-57-0 -fn 5x7 &
+#asclock -shape -position +1092+836 -exe timetool&
+#asmail -geometry -1-27 > /dev/null&
+#/usr/local/bin/ctwm&
+#xhost +freja
+#xhost +zod
+#xhost +balder
+#xhost +mucus
+#xhost +lex
+#xset b 10 100 100
+#xterm -iconic -fg black -bg yellow -cr yellow -C -T console -n console
+
+#exec conky -d &
+#exec feh --bg-scale .bg.jpg &
+#xwinwrap -ni -st -sp -nf -ov -fs -- /usr/local/bin/xscreensaver-hacks/glmatrix -speed 5 -binary -root -window-id WID &
+#twm &
+#exec xterm -geometry 60x30+400+0 -name login 
+#exec xterm -geometry 60x30+400+0 -name ololo
+
+exec xscreensaver -no-splash &
+setxkbmap -layout "us,ru" -option "grp:caps_toggle,terminate:ctrl_alt_bksp" &
+#exec /usr/local/bin/awesome
+export I3SOCK=${HOME}/.i3/i3.socket
+exec /usr/local/bin/i3

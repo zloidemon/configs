@@ -1,0 +1,72 @@
+#use_spacer yes
+use_xft yes
+xftfont Terminus:size=8
+xftalpha 0.8
+text_buffer_size 2048
+# Update interval in seconds
+update_interval 0.5
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+# Create own window instead of using desktop (required in nautilus)
+own_window yes
+own_window_transparent yes
+own_window_type override
+background no
+#own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+# Minimum size of text area
+minimum_size 0 170
+maximum_width 190
+# Draw shades?
+draw_shades yes
+# Draw outlines?
+draw_outline no
+# Draw borders around text
+draw_borders no
+# Stippled borders?
+stippled_borders 0
+# border margins
+#border_margin 4
+# border width
+#border_width 1
+# Default colors and also border colors
+default_color white
+default_shade_color black
+default_outline_color white
+own_window_colour brown
+own_window_transparent yes
+# Text alignment, other possible values are commented
+#alignment top_left
+#lignment top_right
+#alignment bottom_left
+alignment bottom_right
+# Gap between borders of screen and text
+# same thing as passing -x at command line
+#gap_x 10
+#gap_y 10
+# Subtract file system buffers from used memory?
+no_buffers yes
+# set to yes if you want all text to be in uppercase
+uppercase no
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 2
+# number of net samples to average
+# set to 1 to disable averaging
+net_avg_samples 2
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale yes
+# Add spaces to keep things from moving about? This only affects certain objects.
+use_spacer none
+# Use short unit
+short_units on
+TEXT
+${font Weather:size=40}${font} ${font URW Gothic L:size=26}${execi 600 conkyForecast --location=THXX0002 --datatype=HT}${voffset -35}${font}${font ConkyWeather:style=Bold:size=40}${alignc -20}${execi 600 conkyForecast --location=THXX0002 --datatype=WF}${font}
+${voffset 0}${alignc 43}${execpi 600 conkyForecast --location=THXX0002 --datatype=DW --startday=1 --shortweekday} ${alignc 8}${execpi 600 conkyForecast --location=THXX0002 --datatype=DW --startday=2 --shortweekday} ${alignc -29}${execpi 600 conkyForecast --location=THXX0002 --datatype=DW --startday=3 --shortweekday} ${alignc -64}${execpi 600 conkyForecast --location=THXX0002 --datatype=DW --startday=4 --shortweekday}
+${voffset 0}${alignc 75}${font ConkyWeather:size=28}${execpi 600 conkyForecast --location=THXX0002 --datatype=WF --startday=1 --endday=4 --spaces=1}${font}
+${voffset 0}${font URW Gothic L Bold:size=7}${alignc 10}${execpi 600 conkyForecast --location=THXX0002 --datatype=HT --startday=1 --hideunits --centeredwidth=3}/${execpi 600 conkyForecast --location=THXX0002 --datatype=LT --startday=1 --hideunits --centeredwidth=3} ${alignc -14}${execpi 600 conkyForecast --location=THXX0002 --datatype=HT --startday=2 --hideunits --centeredwidth=3}/${execpi 600 conkyForecast --location=THXX0002 --datatype=LT --startday=2 --hideunits --centeredwidth=3} ${alignc -45}${execpi 600 conkyForecast --location=THXX0002 --datatype=HT --startday=3 --hideunits --centeredwidth=3}/${execpi 600 conkyForecast --location=THXX0002 --datatype=LT --startday=3 --hideunits --centeredwidth=3} ${alignr}${execpi 600 conkyForecast --location=THXX0002 --datatype=HT --startday=4 --hideunits --centeredwidth=3}/${execpi 600 conkyForecast --location=THXX0002 --datatype=LT --startday=4 --hideunits --centeredwidth=3}${font}
+#${endif}${else}
+#${font PizzaDude Bullets:size=14}4${font} Weather Unavailable
+#${endif}

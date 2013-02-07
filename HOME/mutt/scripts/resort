@@ -1,0 +1,42 @@
+#!/bin/sh
+
+MAIL="${HOME}/.mutt/mail"
+MAIL_TMP="/tmp/${USER}-mail"
+
+sorting() {
+	local emails
+	echo "Start sorting... "
+	for emails in `find ${MAIL_TMP} -type f`;do
+		cat ${emails}|procmail ${MAIL}/../procmailrc
+	done
+	find ${MAIL_TMP} -type f -delete
+	rmdir ${MAIL_TMP}
+	echo "Done"
+}
+
+moving() {
+	echo "Start moving latters..."
+	find ${MAIL} -type f -exec mv '{}' ${MAIL_TMP} \;
+}
+
+tmp_test() {
+	local _DEL
+	if [ -d "${MAIL_TMP}" ];then
+		if ! [ "$(ls -l ${MAIL_TMP}/|awk '{print $2; exit}')" = "0" ];then
+			sorting
+		fi
+	fi
+}
+
+run_sort() {
+	if [ -d "${MAIL_TMP}" ];then
+		tmp_test
+	else
+		mkdir ${MAIL_TMP} && moving
+		tmp_test
+	fi
+
+
+}
+
+run_sort

@@ -1,0 +1,63 @@
+# This is a zsh startup file.
+
+chpwd() {
+	[[ -t 1 ]] || return
+	case $TERM in
+		sun-cmd) print -Pn "\e]l%~\e\\"
+			;;
+		*xterm*|rxvt|(dt|k|E)term) print -Pn "\e]2;%~\a"
+			;;
+	esac
+}
+
+#autocomplite hosts form know_hosts
+
+if [ -f $HOME/.ssh/known_hosts ]; then
+	local _myhosts
+	_myhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
+	zstyle ':completion:*' hosts $_myhosts
+fi
+
+zstyle ':completion::complete:*' use-cache 1
+
+#PATH
+PATH="/bin:/usr/bin:/usr/local/bin:/usr/bin/X11:/usr/games"
+
+#Color wrapper for a standart commands 
+if [ -d $HOME/.cw/def ];then
+	PATH="$HOME/.cw/def:$PATH"
+fi
+
+if [ ! -z "$DISPLAY" -a -z "$MC_SID" -a "$TERM" != "screen" ]; then
+
+	function precmd {
+		
+		local TERMWIDTH
+		(( TERMWIDTH = ${COLUMNS} - 1 ))
+
+		###
+		# Truncate the path if it's too long.
+    
+		PR_FILLBAR=""
+		PR_PWDLEN=""
+    
+		local promptsize=${#${(%):---(%n@%M)---()--}}
+		local pwdsize=${#${(%):-%~}}
+    
+		if [[ "$promptsize + $pwdsize" -gt $TERMWIDTH ]]; then
+			((PR_PWDLEN=$TERMWIDTH - $promptsize))
+		else
+			PR_FILLBAR="\${(l.(($TERMWIDTH - ($promptsize + $pwdsize)))..${PR_HBAR}.)}"
+		fi
+	}
+
+
+	setopt extended_glob
+	preexec () {
+	if [[ "$TERM" == "screen" ]]; then
+		local CMD=${1[(wr)^(*=*|sudo|-*)]}
+		echo -n "\ek$CMD\e\\"
+	fi
+	}
+fi
+

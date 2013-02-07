@@ -1,0 +1,72 @@
+#!/bin/sh
+
+MUTT="${HOME}/.mutt"
+CONVERT="${MUTT}/scripts/conv2047-0.1.pl -d"
+DB="${MUTT}/mail.db"
+
+mail_db() {
+	create_db() {
+		echo "Creating ${DB}"
+		sqlite3 ${DB} "CREATE TABLE mail (key INTEGER PRIMARY KEY, name TEXT, email TEXT);"
+		echo "${DB} created"
+	}
+
+	insert_db() {
+		local _sql
+		_sql=$(parse $2|awk -F '|' '{gsub(/<|>/, "");print "\047"$1"\047"",""\047"$2"\047"}')
+		sqlite3 ${DB} "INSERT INTO mail VALUES(NULL,${_sql});"
+	}
+
+	if ! [ -f "${DB}" ];then
+		echo "${DB} do not exist"
+		create_db
+	fi
+	insert_db
+
+}
+
+email_del() {
+	local _email
+	_email=$(echo ${1}|sed -r "s|[-a-zA-Z_0-9\.]+@[-a-zA-Z_0-9\.]+\.[a-z]+|'&',|g;s/(.*),$/\1/")
+	sqlite3 ${DB} "DELETE FROM mail WHERE email IN (${_email});"
+}
+
+parse() {
+	awk '{
+		if ($1 == "From:") {
+			if ($4 == "") {
+				if ($3 == "") {
+					{printf $2 "|"};
+					getline(NR+1);
+					print $1
+				}
+				else
+					{print $2 "|" $3}
+				}
+			else
+				{
+					print $2 " " $3 "|" $4
+				}
+			}
+	}'|${CONVERT}
+}
+
+menu() {
+	local _select _msgList _msgMenu
+	_select=$(echo "SELECT name,email from mail;"|sqlite3 ${DB}|awk -F '|' '{printf "\"%s\" \"%s\" %s ", $2, $1, "off"}')
+	_msgList="cdialog --clear --stdout --no-lines --checklist 'Please choose emails to send message' 30 70 20  ${_select}"
+	_msgMenu=$(cdialog --clear --stdout --no-lines --radiolist "Please choese"  30 70 20 del "deleting email" del send "sending mail" send)
+	
+	case ${_msgMenu} in
+		del)	eval ${_msgList}|email_del "$(xargs echo)";;
+		send)	eval ${_msgList}|xargs -o mutt;;
+		*)	exit 0;;
+	esac
+}
+
+case $1 in
+	add) mail_db $2;;
+	menu) menu $2 ;;
+	*) exit 0;;
+esac
+

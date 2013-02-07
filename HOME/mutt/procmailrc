@@ -1,0 +1,15 @@
+# .procmailrc begins here
+MAILDIR=$HOME/.mutt/mail
+VERBOSE=off
+PATH=/bin:/usr/bin:/usr/local/bin:/usr/bin/X11:/usr/games:/sbin:/usr/sbin:/usr/local/sbin:/usr/local/kde4/bin
+DEFAULT=$MAILDIR/INBOX/
+LOGFILE=$HOME/.mutt/procmail.log
+
+:0:
+* ^Subject:.*(Wiki).*
+wiki/
+
+:0 
+* .*
+INBOX/
+

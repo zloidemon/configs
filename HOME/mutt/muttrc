@@ -1,0 +1,73 @@
+#
+set folder=$HOME/.mutt/mail
+set mbox_type=Maildir
+set realname = "Veniamin Gvozdikov"
+set status_on_top
+set from = "g.veniamin@googlemail.com"
+set use_from = "yes"
+set sendmail="/usr/local/bin/msmtp -C $HOME/.mutt/msmtprc"
+source $HOME/.mutt/colors
+set spoolfile = "+INBOX"
+mailboxes = +INBOX +wiki
+set record=$HOME/.mutt/Sent
+set postponed="+Drafts"
+
+
+#sorting and threads
+set sort = threads
+set sort_aux = reverse-date
+set sort_re
+
+#tree configuration
+set strict_threads=yes # don't use Subject: for threading
+set collapse_unread=yes
+set uncollapse_jump=yes
+folder-hook . "push \eV"
+
+bind index - collapse-thread
+bind index _ collapse-all
+
+set wait_key=yes
+#Get mail(fetchmail)
+macro index,pager G "!fetchmail"
+
+#set query_command="echo '%s'"
+macro generic,index,pager \ca "!$HOME/.mutt/scripts/addcontact menu" "launch address book"
+macro index,pager A "|$HOME/.mutt/scripts/addcontact add<return>"
+
+#resorting
+macro index,pager \cf "!$HOME/.mutt/scripts/resort"
+
+set quit='ask-yes'
+
+# pager
+set pager_index_lines = 8# show 8 messages when in pager
+set pager_context     = 5# show five lines when skipping in pager
+set pager_stop           # don't go to next message automatically
+set menu_scroll          # scroll in menus 
+set smart_wrap           # don't split words
+set tilde                # show tildes like in vim
+unset markers            # no ugly plus signs
+
+# composing mail
+set fcc_attach                        # save attachments with the body
+unset mime_forward                    # forward attachments as part of body
+set forward_format      = "Fwd: %s"   # format for subject when forwarding
+set include                           # include message in replies
+set forward_quote                     # include message in forwards
+set ispell="aspell --lang=ru --mode=email check"
+#set editor="vim -c \"set spell spelllang=ru,en\""
+set charset=utf-8
+set locale=ru_RU.UTF-8
+
+# headers to show
+ignore *                              # ignore all headers
+unignore from: to: cc: date: subject: x-url: # show only these
+hdr_order from: to: cc: date: subject: x-url: # and in this order
+
+macro index <F8> \
+"<enter-command>unset wait_key<enter><shell-escape>$HOME/.mutt/scripts/mutt-notmuch --prompt search<enter><change-folder-readonly>~/.cache/mutt_results<enter>" \
+"search mail (using notmuch)"
+macro index <F9> \
+"<enter-command>unset wait_key<enter><pipe-message>$HOME/.mutt/scripts/mutt-notmuch thread<enter><change-folder-readonly>~/.cache/mutt_results<enter><enter-command>set wait_key<enter>" \
+"search and reconstruct owning thread (using notmuch)"

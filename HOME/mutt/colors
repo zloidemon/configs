@@ -1,0 +1,37 @@
+#Header
+color   attachment  cyan         default
+color   header      green        default  "^(message-id|x-mailer|user-agent):"
+color   header      yellow       default  "^date:"
+color   header      yellow       default  "^subject: "
+color   header      cyan         default  "^(from|to|cc|reply-to):"
+color   header      red          default  "^X-URL:"
+
+#index mail in box
+color   index       red          default  "~F|~N"
+color   index       red          default  ~D
+color   index       blue         default  ~T
+color   index       green        default  ~O
+
+color   indicator   brightyellow blue
+color   markers     red          default
+color   quoted      green        default
+color   signature   brightwhite  default
+color   status      yellow       blue     #statusbar
+color   tilde       cyan         default
+color   tree        yellow       default  #mails tree
+
+#body
+color   body        black        default  "(^| )_[-a-z0-9_]+_[,.?]?[ \n]"
+color   body        red          default  "((ftp|http|https)://|(file|news):|www\\.)[-a-z0-9_.:]*[a-z0-9](/[^][{} \t\n\r\"<>()]*[^][{} \t\n\r\"<>().,:!])?/?"
+color   body        cyan         default  "[-a-z_0-9.]+@[-a-z_0-9.]+" # e-mail addresses
+color   body        cyan         default  "[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}" #ip addresses
+color   body        yellow       default  "(Veniamin|Gvozdikov|Вениамин|Гвоздиков)" #me
+
+
+color   body        brightcyan   default  "[;:][-o][)/(|]"     # emoticons
+color   body        brightcyan   default  "[;:][)(|]"          # emoticons
+color   body        brightcyan   default  "[*]?((N)?ACK|CU|LOL|SCNR|BRB|BTW|CWYL|\
+                                           |FWIW|vbg|GD&R|HTH|HTHBE|IMHO|IMNSHO|\
+                                           |IRL|RTFM|ROTFL|ROFL|YMMV)[*]?"
+color   body        cyan         default  "[ ][*][^*]*[*][ ]?" # more emoticon?
+color   body        cyan         default  "[ ]?[*][^*]*[*][ ]" # more emoticon?
