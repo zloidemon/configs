@@ -1,4 +1,21 @@
 # This is a zsh startup file.
+# Auto cd
+setopt autocd
+#autocorrect commands
+setopt CORRECT_ALL
+
+# don't barf on no-match found.
+unsetopt nomatch
+
+# don't barf on bad-pattern.
+unsetopt badpattern 
+
+#Operation systems detector
+OSTYPE=`uname -s`
+
+# setopt promptsubst
+autoload -U colors && colors
+PROMPT="%{$fg[white]%}[%(!.%{$fg[red]%}.%{$fg[green]%})%1~%{$fg[white]%}] %D{%H:%M} %(!.%{$fg[red]%}.%{$fg[white]%})%#> %{$reset_color%}"
 
 chpwd() {
 	[[ -t 1 ]] || return
@@ -10,6 +27,13 @@ chpwd() {
 	esac
 }
 
+case $TERM in
+	*xterm*) export LC_ALL=ru_RU.UTF-8;;
+esac
+
+autoload -U compinit
+compinit
+
 #autocomplite hosts form know_hosts
 
 if [ -f $HOME/.ssh/known_hosts ]; then
@@ -20,13 +44,30 @@ fi
 
 zstyle ':completion::complete:*' use-cache 1
 
+# number of lines kept in history
+export HISTSIZE=1000
+# # number of lines saved in the history after logout
+export SAVEHIST=1000
+# # location of history
+export HISTFILE=$HOME/.zhistory
+# append command to history file once executed
+setopt inc_append_history
+
 #PATH
 PATH="/bin:/usr/bin:/usr/local/bin:/usr/bin/X11:/usr/games"
 
-#Color wrapper for a standart commands 
-if [ -d $HOME/.cw/def ];then
-	PATH="$HOME/.cw/def:$PATH"
-fi
+#includer *.zsh files from $HOME/.zsh
+including(){
+	for i in $(ls -1 ${HOME}/.zsh/$1/);do
+		source ${HOME}/.zsh/$1/${i}
+	done
+}
+
+# sys includes
+including sys
+
+# functions includes
+including func
 
 if [ ! -z "$DISPLAY" -a -z "$MC_SID" -a "$TERM" != "screen" ]; then
 
@@ -60,4 +101,3 @@ if [ ! -z "$DISPLAY" -a -z "$MC_SID" -a "$TERM" != "screen" ]; then
 	fi
 	}
 fi
-
