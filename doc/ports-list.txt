@@ -6,6 +6,7 @@ devel/subversion
 editors/vim-lite
 ftp/curl
 graphics/scrot
+devel/tig
 irc/weechat
 mail/mutt
 net/tightvnc
@@ -23,6 +24,7 @@ sysutils/kldfind
 sysutils/pv
 sysutils/screen
 sysutils/tmux
+sysutils/fsc
 textproc/ack
 textproc/colordiff
 textproc/jq
