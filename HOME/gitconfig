@@ -2,4 +2,20 @@
 	name = Veniamin Gvozdikov
 	email = g.veniamin@googlemail.com
 [color]
-        ui = true
+	ui = true
+	branch = auto
+	diff = auto
+	status = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow
+	frag = magenta
+	old = cyan
+	new = yellow
+[color "status"]
+	added = green
+	changed = yellow
+	untracked = yellow
