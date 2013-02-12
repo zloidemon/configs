@@ -1,30 +1,12 @@
 syntax on
 set hlsearch
 set cursorline
-set encoding=koi8-r
-set termencoding=koi8-r
 set backspace=2
 set noai "auto indante
-"map <F8> :execute RotateEnc()<CR>
-"map <F7> :let &fileencoding=&encoding<CR>
-"let b:encindex=0
-"function! RotateEnc()
-"let y = -1
-"while y == -1
-"let encstring = "#8bit-cp1251#8bit-cp866#utf-8#koi8-r#"
-"let x = match(encstring,"#",b:encindex)
-"let y = match(encstring,"#",x+1)
-"let b:encindex = x+1
-"if y == -1
-"let b:encindex = 0
-"else
-"let str = strpart(encstring,x+1,y-x-1)
-"return ":set encoding=".str
-"endif
-"endwhile
-"endfunction
-"set statusline=%<%f%h%m%r%=%b\ %{&encoding}\ 0x%B\ \ %l,%c%V\ %P
-"syntax on
+"4 spaces for tab
+set tabstop=4
+set shiftwidth=4
+set expandtab
 set nocp
 filetype plugin on
 
@@ -131,7 +113,7 @@ function! RotateFEnc()
   endwhile
 endfunction
 
-set statusline=%<%f%h%m%r%=filetype=%{&filetype}\ format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
+set statusline=%<%f:%P\ %l,%c\ %h%m%r%=%b\ 0x%B\ filetype=%{&filetype}\ format=%{&fileformat}\ fenc=%{&fileencoding}\ enc=%{&encoding}
 set laststatus=2
 
 set wildmenu
@@ -162,9 +144,9 @@ endif " has("autocmd")
 "source ~/.vim/scripts/closetag.vim 
 "au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
 
-" По нажатии клавиши F11 переключение словарей для проверки орфографии (русский+английский, английский, русский, выкл)
+" ▐╝ ╜═╕═Б╗╗ ╙╚═╒╗Х╗ F11 ╞╔Ю╔╙╚НГ╔╜╗╔ А╚╝╒═Ю╔╘ ╓╚О ╞Ю╝╒╔Ю╙╗ ╝ЮД╝ёЮ═Д╗╗ (ЮЦАА╙╗╘+═╜ё╚╗╘А╙╗╘, ═╜ё╚╗╘А╙╗╘, ЮЦАА╙╗╘, ╒К╙╚)
 if version >= 700
-"   По умолчанию проверка орфографии выключена.
+"   ▐╝ Ц╛╝╚Г═╜╗Н ╞Ю╝╒╔Ю╙═ ╝ЮД╝ёЮ═Д╗╗ ╒К╙╚НГ╔╜═.
     setlocal spell spelllang=
     setlocal nospell
     function ChangeSpellLang()
@@ -189,91 +171,91 @@ if version >= 700
 endif
 set nu
 set smartindent
-nmap <C-k> <C-W>k<C-W>_ " окно вверх
-imap <C-k> <Esc><C-W>k<C-W>_a " окно вверх
-nmap <C-j> <C-W>j<C-W>_ " окно вниз
-imap <C-j> <Esc><C-W>j<C-W>_a " окно вниз
+nmap <C-k> <C-W>k<C-W>_ " ╝╙╜╝ ╒╒╔ЮЕ
+imap <C-k> <Esc><C-W>k<C-W>_a " ╝╙╜╝ ╒╒╔ЮЕ
+nmap <C-j> <C-W>j<C-W>_ " ╝╙╜╝ ╒╜╗╖
+imap <C-j> <Esc><C-W>j<C-W>_a " ╝╙╜╝ ╒╜╗╖
 nmap <C-h> :tabp<CR> " previous tab
 nmap <C-l> :tabn<CR> " next tab
 "nmap <S-A-right> :tabp<CR> " previous tab
 "nmap <S-A-left> :tabn<CR> " next tab
 " -------------- ru
-map й q
-map ц w
-map у e
-map к r
-map е t
-map н y
-map г u
-map ш i
-map щ o
-map з p
-map х [
-map ъ ]
-map ф a
-map ы s
-map в d
-map а f
-map п g
-map р h
-map о j
-map л k
-map д l
-map ж ;
-map э '
-map я z
-map ч x
-map с c
-map м v
-map и b
-map т n
-map ь m
-map Й Q
-map Ц W
-map У E
-map К R
-map Е T
-map Н Y
-map Г U
-map Ш I
-map Щ O
-map З P
-map Х {
-map Ъ }
-map Ф A
-map Ы S
-map В D
-map А F
-map П G
-map Р H
-map О J
-map Л K
-map Д L
-map Ж :
-map Э "
-map Я Z
-map Ч X
-map С C
-map М V
-map И B
-map Т N
-map Ь M
-map Б <
-map Ю >
-" эти две пары конфликтуют
-" можно оставить либо одну, либо другую
-"map б ,
-map ю .
+map ╘ q
+map Ф w
+map Ц e
+map ╙ r
+map ╔ t
+map ╜ y
+map ё u
+map Х i
+map И o
+map ╖ p
+map Е [
+map Й ]
+map Д a
+map К s
+map ╒ d
+map ═ f
+map ╞ g
+map Ю h
+map ╝ j
+map ╚ k
+map ╓ l
+map ╕ ;
+map М '
+map О z
+map Г x
+map А c
+map ╛ v
+map ╗ b
+map Б n
+map Л m
+map ┴ Q
+map √ W
+map ⌠ E
+map ┼ R
+map ┘ T
+map █ Y
+map ┐ U
+map ≤ I
+map ≥ O
+map ┤ P
+map ∙ {
+map   }
+map ■ A
+map ⌡ S
+map ┌ D
+map ─ F
+map ▐ G
+map ░ H
+map ▌ J
+map ▀ K
+map └ L
+map ├ :
+map ² "
+map ÷ Z
+map ≈ X
+map ▒ C
+map ▄ V
+map ┬ B
+map ▓ N
+map ° M
+map │ <
+map · >
+" МБ╗ ╓╒╔ ╞═ЮК ╙╝╜Д╚╗╙БЦНБ
+" ╛╝╕╜╝ ╝АБ═╒╗БЛ ╚╗║╝ ╝╓╜Ц, ╚╗║╝ ╓ЮЦёЦН
+"map ║ ,
+map Н .
 " map . /
 " map , ?
 "####################################################################
 "                              FOLDING
 "####################################################################
-"zc - свернуть блок
-"zo - развернуть блок
-"zM - закрыть все блоки
-"zR - открыть все блоки
-"za - инвертирование (если открыто - закрыть, если закрыто - открыть)
+"zc - А╒╔Ю╜ЦБЛ ║╚╝╙
+"zo - Ю═╖╒╔Ю╜ЦБЛ ║╚╝╙
+"zM - ╖═╙ЮКБЛ ╒А╔ ║╚╝╙╗
+"zR - ╝Б╙ЮКБЛ ╒А╔ ║╚╝╙╗
+"za - ╗╜╒╔ЮБ╗Ю╝╒═╜╗╔ (╔А╚╗ ╝Б╙ЮКБ╝ - ╖═╙ЮКБЛ, ╔А╚╗ ╖═╙ЮКБ╝ - ╝Б╙ЮКБЛ)
 hi Folded ctermbg=cyan		ctermfg=black
 " Perl
 function! GetPerlFold()
@@ -345,7 +327,8 @@ function! Folding()
     endfunction
     "setl foldtext=FoldText()
 endfunction
-au FileType css,javascript,c,cpp,java,cs call Folding()
+
+map <F9> <Esc>:call Folding()<CR>
 au FileType css,javascript,c,cpp,java,cs setl fen
 
 "au FileType javascript call JavaScriptFold2()
@@ -356,5 +339,5 @@ au BufRead,BufNewFile extensions.conf       call s:FTAsterisk()
 func! s:FTAsterisk()
    setf asterisk
 endfunc
-"colorscheme pablo
+
 colorscheme desert
