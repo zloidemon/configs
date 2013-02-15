@@ -69,8 +69,8 @@ fi
 #exec xterm -geometry 60x30+400+0 -name login 
 #exec xterm -geometry 60x30+400+0 -name ololo
 
-exec xscreensaver -no-splash &
+exec xautolock -time 10 -locker slock &
+#exec xscreensaver -no-splash &
 setxkbmap -layout "us,ru" -option "grp:caps_toggle,terminate:ctrl_alt_bksp" &
-#exec /usr/local/bin/awesome
 export I3SOCK=${HOME}/.i3/i3.socket
 exec /usr/local/bin/i3
