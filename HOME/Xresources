@@ -1,5 +1,5 @@
-!XTerm*faceName: Monaco 
-!XTerm*faceSize: 9
+XTerm*faceName: UbuntuMono 
+XTerm*faceSize: 12
 XTerm*scrollBar: True
 XTerm*locale: true
 XTerm*saveLines: 1000
@@ -15,8 +15,8 @@ URxvt*scrollBar: false
 URxvt*scrollBar_right: true 
 URxvt*urgentOnBell: false
 !URxvt*font: xft:Terminus:Fixed:pixelsize=14:autohint=true:antialias=true:hinting=true
-URxvt*font: xft:Monaco:pixelsize=15:antialias=true
-URxvt*boldFont: xft:Monaco:pixelsize=15:weight=bold
+URxvt*font: xft:UbuntuMono:pixelsize=17:antialias=true
+URxvt*boldFont: xft:UbuntuMono:pixelsize=17:weight=bold
 URxvt.matcher.button  : 1
 URxvt.colorUL: #0FB62C
 URxvt.urlLauncher: opera
