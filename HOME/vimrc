@@ -4,8 +4,8 @@ set cursorline
 set backspace=2
 set noai "auto indante
 "4 spaces for tab
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 set nocp
 filetype plugin on
