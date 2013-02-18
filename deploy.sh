@@ -85,6 +85,7 @@ ussage()
     backup) echo -n "\
   Ussage:
     backup list:         list backuped files.
+    backup once vimrc:   list of backups vimrc.
 ";;
 
     *) echo -n "\
@@ -117,6 +118,10 @@ case ${1} in
         do
           ls -1 .${l}.bak* 2> /dev/null
         done;;
+      once)
+        cd ${HOME} &&
+        ls -1 .${3}.bak* 2> /dev/null
+        ;;
       *) ussage ${1};;
     esac;;
   update)
