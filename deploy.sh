@@ -1,6 +1,7 @@
 #!/bin/sh
 
 DIFF=diff
+DATE=$(date "+%s")
 INSTALL=install
 PERMS="-v -m 0700"
 
@@ -27,6 +28,11 @@ checking()
         if   [ "x${_READ}" = "xyes" ]
         then
           echo "NOTICE: file will backuped as ${_DST}.bak."
+          if [ -f ${_DST}.bak ]
+          then
+            echo "NOTICE: ${_DST}.bak exist and will moved."
+            mv -v ${_DST}.bak ${_DST}.bak.${DATE}
+          fi
           cp ${_DST} ${_DST}.bak
           break
         elif [ "x${_READ}" = "xno" ]
