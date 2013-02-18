@@ -79,12 +79,18 @@ ussage()
 
     update) echo -n "\
   Ussage:
-    install update:      similar - git pull.
+    update:              similar - git pull.
+";;
+
+    backup) echo -n "\
+  Ussage:
+    backup list:         list backuped files.
 ";;
 
     *) echo -n "\
   Ussage:
     install:             force installing configs.
+    backup:              backup operations.
     update:              update configs and check diff.
     remove:              remove configs.
 ";;
@@ -102,6 +108,16 @@ case ${1} in
         done;;
       once) installing ${3};;
       *)    ussage ${1};;
+    esac;;
+  backup)
+    case ${2} in
+      list)
+        cd ${HOME} &&
+        for l in ${CONFIGS}
+        do
+          ls -1 .${l}.bak* 2> /dev/null
+        done;;
+      *) ussage ${1};;
     esac;;
   update)
     case ${2} in
