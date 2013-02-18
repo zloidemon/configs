@@ -1,5 +1,6 @@
 #!/bin/sh
 
+DIFF=diff
 INSTALL=install
 PERMS="-v -m 0700"
 
@@ -13,7 +14,7 @@ checking()
   _DST=${2}
   if [ -f ${_DST} ]
   then
-    diff -up ${_SRC} ${_DST} 
+    ${DIFF} -up ${_SRC} ${_DST} 
     if [ $? -eq 0 ]
     then
       echo "NOTICE: ${_DST} exist but do not midifed."
@@ -25,12 +26,12 @@ checking()
         read _READ
         if   [ "x${_READ}" = "xyes" ]
         then
-          echo "NOTICE: file will backuped as ${_DST}.bak and reinstall."
+          echo "NOTICE: file will backuped as ${_DST}.bak."
           cp ${_DST} ${_DST}.bak
           break
         elif [ "x${_READ}" = "xno" ]
         then
-          echo "NOTICE: Installing ${_SRC} without backup."
+          echo "NOTICE: Backuping ${_SRC} cancelled."
           break
         else
           continue
