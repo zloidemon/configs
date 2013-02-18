@@ -70,6 +70,11 @@ ussage()
     install once vimrc:  for installing vimrc.
 ";;
 
+    update) echo -n "\
+  Ussage:
+    install update:      similar - git pull.
+";;
+
     *) echo -n "\
   Ussage:
     install:             force installing configs.
@@ -92,7 +97,10 @@ case ${1} in
       *)    ussage ${1};;
     esac;;
   update)
-    echo UPDATE;;
+    case ${2} in
+      help|?) ussage ${1};;
+      *)      git pull;;
+    esac;;
   remove)
     echo remove;;
   *)
