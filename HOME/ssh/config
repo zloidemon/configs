@@ -1,2 +1,3 @@
 StrictHostKeyChecking no
+HashKnownHosts no # need for autocomplite hosts in ZSH
 ConnectTimeout 100

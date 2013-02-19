@@ -11,7 +11,7 @@ unsetopt nomatch
 unsetopt badpattern 
 
 #Operation systems detector
-OSTYPE=`uname -s`
+OSTYPE=$(uname -s)
 
 # setopt promptsubst
 autoload -U colors && colors
@@ -36,10 +36,12 @@ compinit
 
 #autocomplite hosts form know_hosts
 
-if [ -f $HOME/.ssh/known_hosts ]; then
+
+if [ -f $HOME/.ssh/known_hosts ]
+then
 	local _myhosts
-	_myhosts=( ${${${${(f)"$(<$HOME/.ssh/known_hosts)"}:#[0-9]*}%%\ *}%%,*} )
-	zstyle ':completion:*' hosts $_myhosts
+	_myhosts='reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+	zstyle -e ':completion::*:*:*:hosts' hosts ${_myhosts}
 fi
 
 zstyle ':completion::complete:*' use-cache 1
@@ -58,7 +60,8 @@ PATH="/bin:/usr/bin:/usr/local/bin:/usr/bin/X11:/usr/games"
 
 #includer *.zsh files from $HOME/.zsh
 including(){
-	for i in $(ls -1 ${HOME}/.zsh/$1/);do
+	for i in $(ls -1 ${HOME}/.zsh/$1/)
+	do
 		source ${HOME}/.zsh/$1/${i}
 	done
 }
@@ -69,8 +72,8 @@ including sys
 # functions includes
 including func
 
-if [ ! -z "$DISPLAY" -a -z "$MC_SID" -a "$TERM" != "screen" ]; then
-
+if [ ! -z "$DISPLAY" -a -z "$MC_SID" -a "$TERM" != "screen" ]
+then
 	function precmd {
 		
 		local TERMWIDTH
@@ -95,7 +98,8 @@ if [ ! -z "$DISPLAY" -a -z "$MC_SID" -a "$TERM" != "screen" ]; then
 
 	setopt extended_glob
 	preexec () {
-	if [[ "$TERM" == "screen" ]]; then
+	if [[ "$TERM" == "screen" ]]
+	then
 		local CMD=${1[(wr)^(*=*|sudo|-*)]}
 		echo -n "\ek$CMD\e\\"
 	fi
