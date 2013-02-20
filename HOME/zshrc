@@ -58,6 +58,10 @@ setopt inc_append_history
 #PATH
 PATH="/bin:/usr/bin:/usr/local/bin:/usr/bin/X11:/usr/games"
 
+case ${OSTYPE} in
+	FreeBSD) PATH=${PATH}:/usr/sbin:/sbin:/usr/local/sbin;;
+esac
+
 #includer *.zsh files from $HOME/.zsh
 including(){
 	for i in $(ls -1 ${HOME}/.zsh/$1/)
