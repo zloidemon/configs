@@ -6,3 +6,7 @@ NO_CCACHE=yes
 .if ${.CURDIR:M*/devel/ipython*}
 WITHOUT_X11=yes
 .endif
+
+.if ${.CURDIR:M*/devel/subversion*}
+WITHOUT_STATIC=yes
+.endif
