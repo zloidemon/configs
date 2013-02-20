@@ -88,12 +88,20 @@ ussage()
     backup once vimrc:   list of backups vimrc.
 ";;
 
+    pd) echo -n "\
+  Ussage:
+    pd desktop all:      gen list for all ports.
+    pd desktop net:      gen list for build port from net.
+    pd desktop clean:    delete /tmp/desktop-make.conf and /tmp/desktop-list.conf.
+";;
+
     *) echo -n "\
   Ussage:
     install:             force installing configs.
     backup:              backup operations.
     update:              update configs and check diff.
     remove:              remove configs.
+    pd:                  poudriere files for building.
 ";;
   esac
 }
@@ -128,6 +136,30 @@ case ${1} in
     case ${2} in
       help|?) ussage ${1};;
       *)      git pull;;
+    esac;;
+  pd)
+    PD_LIST=/tmp/${2}-list.conf
+    PD_MAKE=/tmp/${2}-make.conf
+    case ${2} in
+      desktop)
+        case ${3} in
+        all)
+          cat env/Mk/make-*.mk       > ${PD_MAKE}
+          cat env/Ports/ports-*.conf > ${PD_LIST};;
+        clean)
+          rm ${PD_LIST} ${PD_MAKE};;
+        *)
+          if [ -f env/Mk/make-${3}.mk ]
+          then
+            cat env/Mk/make-${3}.mk > ${PD_MAKE}
+          fi
+          if [ -f env/Ports/ports-${3}.conf ]
+          then
+            cat env/Ports/ports-${3}.conf > ${PD_LIST}
+          fi
+          ;;
+        esac;;
+      *) ussage ${1};;
     esac;;
   remove)
     echo remove;;
