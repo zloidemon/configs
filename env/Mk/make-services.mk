@@ -6,3 +6,7 @@ WITH_LUA=yes
 .if ${.CURDIR:M*/databases/redis*}
 WITH_LUAJIT=yes
 .endif
+
+.if ${.CURDIR:M*/databases/mongodb*}
+WITH_V8=yes
+.endif
