@@ -113,7 +113,7 @@ function! RotateFEnc()
   endwhile
 endfunction
 
-set statusline=%<%f:%P\ %l,%c\ %h%m%r%=%b\ 0x%B\ filetype=%{&filetype}\ format=%{&fileformat}\ fenc=%{&fileencoding}\ enc=%{&encoding}
+set statusline=%<%f:%P\ %l,%c\ %h%m%r%=%b\ 0x%B\ filetype=%{&filetype}\ format=%{&fileformat}\ fenc=%{&fileencoding}\ enc=%{&encoding}\ %{strftime(\"%H:%M\")}
 set laststatus=2
 
 set wildmenu

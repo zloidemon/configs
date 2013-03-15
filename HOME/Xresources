@@ -26,7 +26,10 @@ URxvt*jumpScroll: true
 URxvt*perl-ext: tabbed
 URxvt.saveLines: 2500
 URxvt.perl-ext-common:  default,tabbed,matcher
+URxvt*termName: rxvt
+
 urxvt.color15: #283C77
+
 URxvt.tabbed.tabbar-fg: 2
 URxvt.tabbed.tabbar-bg:15
 URxvt.tabbed.tab-fg: 3
