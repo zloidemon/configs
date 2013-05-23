@@ -76,7 +76,7 @@ including sys
 # functions includes
 including func
 
-if [ ! -z "$DISPLAY" -a -z "$MC_SID" -a "$TERM" != "screen" ]
+if [ ! -z "${DISPLAY}" -a -z "${MC_SID}" -a "${TERM}" != "screen" ]
 then
 	function precmd {
 		
