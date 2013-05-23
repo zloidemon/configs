@@ -9,8 +9,6 @@
 # layout, use the i3-config-wizard
 #
 
-workspace 2 www
-workspace 3 im
 assign [class="Firefox"] 2
 assign [class="Opera"]   2
 assign [class="Skype"]   3
