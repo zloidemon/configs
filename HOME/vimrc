@@ -330,6 +330,7 @@ endfunction
 
 map <F9> <Esc>:call Folding()<CR>
 au FileType css,javascript,c,cpp,java,cs setl fen
+au BufRead,BufNewFile *.jinja,*.macro set filetype=jinja
 
 "au FileType javascript call JavaScriptFold2()
 "au FileType javascript setl fen
