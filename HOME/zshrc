@@ -15,7 +15,7 @@ OSTYPE=$(uname -s)
 
 # setopt promptsubst
 autoload -U colors && colors
-PROMPT="%{$fg[white]%}[%(!.%{$fg[red]%}.%{$fg[green]%})%1~%{$fg[white]%}] %D{%H:%M} %(!.%{$fg[red]%}.%{$fg[white]%})%#> %{$reset_color%}"
+PROMPT="$fg[cyan]%m:%{$fg[white]%}[%(!.%{$fg[red]%}.%{$fg[green]%})%1~%{$fg[white]%}] %D{%H:%M} %(!.%{$fg[red]%}.%{$fg[white]%})%#> %{$reset_color%}"
 
 chpwd() {
 	[[ -t 1 ]] || return
