@@ -17,7 +17,7 @@ OSTYPE=$(uname -s)
 autoload -U colors && colors
 
 # Gen colors
-for c in cyan green red white
+for c in cyan green magenta red white yellow
 do
 	local ZCLR_${c}="%{$fg[${c}]%}"
 done
@@ -69,7 +69,7 @@ case ${OSTYPE} in
 		PATH=${PATH}:/usr/sbin:/sbin:/usr/local/sbin
 		if [ $(sysctl -n security.jail.jailed) -eq 1 ]
 		then
-			CHROOT="${ZCLR_green}"
+			CHROOT="${ZCLR_yellow}"
 		fi
 	;;
 esac
