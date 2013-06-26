@@ -67,7 +67,7 @@ installing()
   done
 }
 
-ussage()
+usage()
 {
   case ${1} in
     install) echo -n "\
@@ -116,7 +116,7 @@ case ${1} in
           echo "    ${l}"
         done;;
       once) installing ${3};;
-      *)    ussage ${1};;
+      *)    usage ${1};;
     esac;;
   backup)
     case ${2} in
@@ -130,11 +130,11 @@ case ${1} in
         cd ${HOME} &&
         ls -1 .${3}.bak* 2> /dev/null
         ;;
-      *) ussage ${1};;
+      *) usage ${1};;
     esac;;
   update)
     case ${2} in
-      help|?) ussage ${1};;
+      help|?) usage ${1};;
       *)      git pull;;
     esac;;
   pd)
@@ -159,11 +159,11 @@ case ${1} in
           fi
           ;;
         esac;;
-      *) ussage ${1};;
+      *) usage ${1};;
     esac;;
   remove)
     echo remove;;
   *)
-    ussage;;
+    usage;;
 esac    
 

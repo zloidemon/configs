@@ -10,12 +10,17 @@ unsetopt nomatch
 # don't barf on bad-pattern.
 unsetopt badpattern 
 
-#Operation systems detector
+# OS detector
 OSTYPE=$(uname -s)
 
 # setopt promptsubst
 autoload -U colors && colors
-PROMPT="%{$fg[cyan]%}%m:%{$fg[white]%}[%(!.%{$fg[red]%}.%{$fg[green]%})%1~%{$fg[white]%}] %D{%H:%M} %(!.%{$fg[red]%}.%{$fg[white]%})%#> %{$reset_color%}"
+
+# Gen colors
+for c in cyan green red white
+do
+	local ZCLR_${c}="%{$fg[${c}]%}"
+done
 
 chpwd() {
 	[[ -t 1 ]] || return
@@ -57,16 +62,25 @@ setopt inc_append_history
 
 #PATH
 PATH="/bin:/usr/bin:/usr/local/bin:/usr/bin/X11:/usr/games"
+CHROOT="${ZCLR_cyan}"
 
 case ${OSTYPE} in
-	FreeBSD) PATH=${PATH}:/usr/sbin:/sbin:/usr/local/sbin;;
+	FreeBSD)
+		PATH=${PATH}:/usr/sbin:/sbin:/usr/local/sbin
+		if [ $(sysctl -n security.jail.jailed) -eq 1 ]
+		then
+			CHROOT="${ZCLR_green}"
+		fi
+	;;
 esac
+
+PROMPT="${CHROOT}%m:${ZCLR_white}[%(!.${ZCLR_red}.${ZCLR_green})%1~${ZCLR_white}] %D{%H:%M} %(!.${ZCLR_red}.${ZCLR_white})%#> %{$reset_color%}"
 
 #includer *.zsh files from $HOME/.zsh
 including(){
-	for i in $(ls -1 ${HOME}/.zsh/$1/)
+	for i in $(ls -1 ${HOME}/.zsh/${1}/)
 	do
-		source ${HOME}/.zsh/$1/${i}
+		source ${HOME}/.zsh/${1}/${i}
 	done
 }
 
