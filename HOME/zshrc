@@ -28,7 +28,7 @@ chpwd() {
 }
 
 case $TERM in
-	*xterm*) export LC_ALL=ru_RU.UTF-8;;
+	*xterm*|rxvt) export LC_ALL=ru_RU.UTF-8;;
 esac
 
 autoload -U compinit
