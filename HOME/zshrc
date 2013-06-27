@@ -74,7 +74,7 @@ case ${OSTYPE} in
 	;;
 esac
 
-PROMPT="${CHROOT}%m:${ZCLR_white}[%(!.${ZCLR_red}.${ZCLR_green})%1~${ZCLR_white}] %D{%H:%M} %(!.${ZCLR_red}.${ZCLR_white})%#> %{$reset_color%}"
+PROMPT="${CHROOT}%m:${ZCLR_white}[%(!.${ZCLR_red}.${ZCLR_green})%1~${ZCLR_white}] %(!.${ZCLR_red}.${ZCLR_white})%#> %{$reset_color%}"
 
 #includer *.zsh files from $HOME/.zsh
 including(){
