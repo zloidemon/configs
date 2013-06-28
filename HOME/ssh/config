@@ -1,3 +1,6 @@
-StrictHostKeyChecking no
 HashKnownHosts no # need for autocomplite hosts in ZSH
 ConnectTimeout 100
+
+Host 10.*
+   StrictHostKeyChecking no
+   UserKnownHostsFile=/dev/null
