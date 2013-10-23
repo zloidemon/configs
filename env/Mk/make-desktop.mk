@@ -5,3 +5,7 @@ WITHOUT_VIDEO=yes
 .if ${.CURDIR:M*/print/qpdfview*}
 WITH_DJVU=yes
 .endif
+
+.if ${.CURDIR:M*/www/luakit*}
+WITH_LUAJIT=yes
+.endif
