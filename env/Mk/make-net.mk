@@ -10,3 +10,8 @@ WITH_GPGME=yes
 WITH_OTR=yes
 WITH_ASPELL=yes
 .endif
+
+.if ${.CURDIR:M*/irc/weechat*}
+WITH_GNUTLS=yes
+WITH_LUA=yes
+.endif
