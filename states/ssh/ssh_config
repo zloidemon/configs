@@ -1,0 +1,13 @@
+HashKnownHosts no
+ConnectTimeout 100
+
+Host *freebsd.org
+    User vg
+
+Host 10.*
+   StrictHostKeyChecking no
+   UserKnownHostsFile=/dev/null
+
+Host 127.0.0.*
+   StrictHostKeyChecking no
+   UserKnownHostsFile=/dev/null
