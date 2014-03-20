@@ -1,6 +1,6 @@
 # FreeBSD Port Tools configuration file - see porttools(5)
 # vim: ft=sh
-EMAIL="vg@freebsd.org"
+EMAIL="vg@FreeBSD.org"
 FULLNAME="Veniamin Gvozdikov"
 ORGANIZATION=""
 BUILDROOT="/tmp"

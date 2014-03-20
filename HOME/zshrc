@@ -62,7 +62,13 @@ setopt inc_append_history
 
 #PATH
 PATH="/bin:/usr/bin:/usr/local/bin:/usr/bin/X11:/usr/games"
-CHROOT="${ZCLR_cyan}"
+
+if [ $SSH_CLIENT ]
+then
+	CHROOT="${ZCLR_red}SSH${ZCLR_white}|${ZCLR_cyan}"
+else
+	CHROOT="${ZCLR_cyan}"
+fi
 
 case ${OSTYPE} in
 	FreeBSD)
