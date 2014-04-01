@@ -1,4 +1,5 @@
 HashKnownHosts no # need for autocomplite hosts in ZSH
+ForwardAgent yes
 ConnectTimeout 100
 
 Host 10.*
