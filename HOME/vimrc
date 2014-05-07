@@ -4,9 +4,6 @@ set cursorline
 set backspace=2
 set noai "auto indante
 "4 spaces for tab
-set tabstop=2
-set shiftwidth=2
-set expandtab
 set nocp
 filetype plugin on
 
@@ -331,6 +328,7 @@ endfunction
 map <F9> <Esc>:call Folding()<CR>
 au FileType css,javascript,c,cpp,java,cs setl fen
 au BufRead,BufNewFile *.jinja,*.macro set filetype=jinja
+au FileType python setl tabstop=2 shiftwidth=2 expandtab
 
 "au FileType javascript call JavaScriptFold2()
 "au FileType javascript setl fen
