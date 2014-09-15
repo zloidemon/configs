@@ -73,6 +73,12 @@ fi
 case ${OSTYPE} in
 	FreeBSD)
 		PATH=${PATH}:/usr/sbin:/sbin:/usr/local/sbin
+		export CCACHE_DIR=/var/ccache
+		export CCACHE_LOGFILE=/var/ccache/ccache.log
+		if [ -x /usr/local/bin/ccache ]
+		then
+			/usr/local/bin/ccache -M 15g > /dev/null
+		fi
 		if [ $(sysctl -n security.jail.jailed) -eq 1 ]
 		then
 			CHROOT="${ZCLR_yellow}"
