@@ -77,7 +77,7 @@ case ${OSTYPE} in
 		export CCACHE_LOGFILE=/var/ccache/ccache.log
 		if [ -x /usr/local/bin/ccache ]
 		then
-			/usr/local/bin/ccache -M 15g > /dev/null
+			/usr/local/bin/ccache -M 15G > /dev/null
 		fi
 		if [ $(sysctl -n security.jail.jailed) -eq 1 ]
 		then
@@ -85,6 +85,11 @@ case ${OSTYPE} in
 		fi
 	;;
 esac
+
+if [ -d ${HOME}/.npm-packages ]
+then
+	PATH=${PATH}:${HOME}/.npm-packages/bin
+fi
 
 PROMPT="${CHROOT}%m:${ZCLR_white}[%(!.${ZCLR_red}.${ZCLR_green})%1~${ZCLR_white}] %(!.${ZCLR_red}.${ZCLR_white})%#> %{$reset_color%}"
 
