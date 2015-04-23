@@ -79,6 +79,10 @@ case ${OSTYPE} in
 		then
 			/usr/local/bin/ccache -M 15G > /dev/null
 		fi
+		if [ -d /usr/local/FreeBSD/head ]
+		then
+			PATH=${PATH}:/usr/local/FreeBSD/head/Tools/scripts
+		fi
 		if [ $(sysctl -n security.jail.jailed) -eq 1 ]
 		then
 			CHROOT="${ZCLR_yellow}"
