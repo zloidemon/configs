@@ -71,6 +71,10 @@ else
 fi
 
 case ${OSTYPE} in
+	# Actually I use ubuntu
+	Linux)
+		PATH=${PATH}:/usr/local/sbin:/usr/sbin:/sbin
+	;;
 	FreeBSD)
 		PATH=${PATH}:/usr/sbin:/sbin:/usr/local/sbin
 		export CCACHE_DIR=/var/ccache
@@ -89,11 +93,6 @@ case ${OSTYPE} in
 		fi
 	;;
 esac
-
-if [ -d ${HOME}/.npm-packages ]
-then
-	PATH=${PATH}:${HOME}/.npm-packages/bin
-fi
 
 PROMPT="${CHROOT}%m:${ZCLR_white}[%(!.${ZCLR_red}.${ZCLR_green})%1~${ZCLR_white}] %(!.${ZCLR_red}.${ZCLR_white})%#> %{$reset_color%}"
 
