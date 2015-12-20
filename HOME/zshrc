@@ -71,13 +71,21 @@ else
 fi
 
 case ${OSTYPE} in
+	# Actually I use ubuntu
+	Linux)
+		PATH=${PATH}:/usr/local/sbin:/usr/sbin:/sbin
+	;;
 	FreeBSD)
 		PATH=${PATH}:/usr/sbin:/sbin:/usr/local/sbin
 		export CCACHE_DIR=/var/ccache
 		export CCACHE_LOGFILE=/var/ccache/ccache.log
 		if [ -x /usr/local/bin/ccache ]
 		then
-			/usr/local/bin/ccache -M 15g > /dev/null
+			/usr/local/bin/ccache -M 15G > /dev/null
+		fi
+		if [ -d /usr/local/FreeBSD/head ]
+		then
+			PATH=${PATH}:/usr/local/FreeBSD/head/Tools/scripts
 		fi
 		if [ $(sysctl -n security.jail.jailed) -eq 1 ]
 		then
