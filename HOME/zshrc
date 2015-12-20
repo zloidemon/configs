@@ -84,7 +84,23 @@ case ${OSTYPE} in
 			CHROOT="${ZCLR_yellow}"
 		fi
 	;;
+	Darwin)
+		PATH=${PATH}:/usr/sbin:/usr/bin:/sbin
+		if [ -d ${HOME}/Devel/node ]
+		then
+			PATH=${PATH}:${HOME}/Devel/node/current/bin
+		fi
+		if [ -d /usr/local/texlive/2014/bin/universal-darwin ]
+		then
+			PATH=${PATH}:/usr/local/texlive/2014/bin/universal-darwin
+		fi
+	;;
 esac
+
+if [ -d $HOME/opt ]
+then
+	PATH=${PATH}:${HOME}/opt/bin:${HOME}/opt/sbin
+fi
 
 PROMPT="${CHROOT}%m:${ZCLR_white}[%(!.${ZCLR_red}.${ZCLR_green})%1~${ZCLR_white}] %(!.${ZCLR_red}.${ZCLR_white})%#> %{$reset_color%}"
 
@@ -135,3 +151,4 @@ then
 	fi
 	}
 fi
+

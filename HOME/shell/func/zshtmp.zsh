@@ -65,9 +65,13 @@ function zshtmp(){
 			fi
 
 		;;
+		load)
+			source $ZTMP
+		;;
 		*)
 			echo "Usage:"
 			echo "           rehash for regenerate the .zshtmp"
+			echo "           load for loading .zshtmp"
 		;;
 	esac
 }
