@@ -343,3 +343,5 @@ func! s:FTAsterisk()
 endfunc
 
 colorscheme desert
+highlight ColorColumn ctermbg=gray
+set colorcolumn=80

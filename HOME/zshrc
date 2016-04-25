@@ -81,7 +81,7 @@ case ${OSTYPE} in
 		export CCACHE_LOGFILE=/var/ccache/ccache.log
 		if [ -x /usr/local/bin/ccache ]
 		then
-			/usr/local/bin/ccache -M 15G > /dev/null
+			/usr/local/bin/ccache -M 5G > /dev/null
 		fi
 		if [ -d /usr/local/FreeBSD/head ]
 		then
