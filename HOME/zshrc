@@ -105,9 +105,9 @@ case ${OSTYPE} in
 	;;
 esac
 
-if [ -d $HOME/opt ]
+if [ -d $HOME/.opt ]
 then
-	PATH=${PATH}:${HOME}/opt/bin:${HOME}/opt/sbin
+	PATH=${PATH}:${HOME}/.opt/bin:${HOME}/.opt/sbin
 fi
 
 PROMPT="${CHROOT}%m:${ZCLR_white}[%(!.${ZCLR_red}.${ZCLR_green})%1~${ZCLR_white}] %(!.${ZCLR_red}.${ZCLR_white})%#> %{$reset_color%}"
