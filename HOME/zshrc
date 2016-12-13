@@ -102,6 +102,10 @@ case ${OSTYPE} in
 		then
 			PATH=${PATH}:/usr/local/texlive/2014/bin/universal-darwin
 		fi
+		if [ -d ${HOME}/.homebrew ]
+		then
+			PATH=${PATH}:${HOME}/.homebrew/bin
+		fi
 	;;
 esac
 
