@@ -3,7 +3,6 @@ export XZ_OPT=-9v
 
 #GREP
 export GREP_COLOR='1;31'
-export GREP_OPTIONS='--color=auto' 
 
 #LS
 export LSCOLORS="dxGxFxcxbxDxDxExEx"

@@ -331,8 +331,10 @@ au BufRead,BufNewFile *.jinja,*.macro set filetype=jinja
 au FileType python setl tabstop=4 shiftwidth=4 expandtab
 au FileType lua setl tabstop=4 shiftwidth=4 expandtab
 au FileType t setl tabstop=4 shiftwidth=4 expandtab
+au FileType go setl tabstop=4 shiftwidth=4 expandtab
+au FileType yaml setl tabstop=2 shiftwidth=2 expandtab
 au FileType html setl tabstop=2 shiftwidth=2 expandtab
-au FileType javascript setl tabstop=2 shiftwidth=2 expandtab
+au FileType javascript setl tabstop=4 shiftwidth=4 expandtab
 
 "au FileType javascript call JavaScriptFold2()
 "au FileType javascript setl fen
