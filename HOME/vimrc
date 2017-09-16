@@ -349,7 +349,3 @@ endfunc
 colorscheme desert
 highlight ColorColumn ctermbg=gray
 set colorcolumn=80
-
-call plug#begin('~/.vim/plugged')
-Plug 'keith/swift.vim'
-call plug#end()
