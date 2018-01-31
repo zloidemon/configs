@@ -331,6 +331,7 @@ au BufRead,BufNewFile *.jinja,*.macro set filetype=jinja
 au BufRead,BufNewFile *.t set filetype=lua
 au FileType python setl tabstop=4 shiftwidth=4 expandtab
 au FileType lua setl tabstop=4 shiftwidth=4 expandtab
+au FileType erlang setl tabstop=4 shiftwidth=4 expandtab
 au FileType go setl tabstop=4 shiftwidth=4 expandtab
 au FileType swift setl tabstop=4 shiftwidth=4 expandtab
 au FileType yaml setl tabstop=2 shiftwidth=2 expandtab

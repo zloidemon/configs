@@ -1,6 +1,9 @@
 case ${OSTYPE} in
-	Linux)
-		SWIFTROOT=${HOME}/Devel/Swift/current/usr
-		export PATH=${PATH}:${SWIFTROOT}/bin
+	Darwin)
+		export TOOLCHAINS=swift
 	;;
 esac
+
+alias spi='swift package init'
+alias spx='swift package generate-xcodeproj'
+alias spu='swift package update'
