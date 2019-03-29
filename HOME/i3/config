@@ -10,6 +10,7 @@
 #
 
 assign [class="Firefox"]        → 2:www
+assign [class="KeePassX"]       → 2:www
 assign [class="Opera"]          → 2:www
 assign [class="Skype"]          → 3:im
 

@@ -15,7 +15,7 @@ URxvt*scrollBar: false
 URxvt*scrollBar_right: true 
 URxvt*urgentOnBell: false
 !URxvt*font: xft:Terminus:Fixed:pixelsize=14:autohint=true:antialias=true:hinting=true
-URxvt*font: xft:UbuntuMono:pixelsize=17:antialias=true
+URxvt*font: xft:UbuntuMono:pixelsize=17:antialias=true:hinting=true
 URxvt*boldFont: xft:UbuntuMono:pixelsize=17:weight=bold
 URxvt.matcher.button  : 1
 URxvt.colorUL: #0FB62C
