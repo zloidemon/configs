@@ -328,6 +328,7 @@ endfunction
 map <F9> <Esc>:call Folding()<CR>
 au FileType css,c,cpp,java,cs setl fen
 au BufRead,BufNewFile *.jinja,*.macro set filetype=jinja
+au BufRead,BufNewFile *.swift set filetype=swift
 au BufRead,BufNewFile *.t set filetype=lua
 au FileType python setl tabstop=4 shiftwidth=4 expandtab
 au FileType lua setl tabstop=4 shiftwidth=4 expandtab
