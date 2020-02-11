@@ -33,7 +33,7 @@ chpwd() {
 }
 
 case $TERM in
-	*xterm*|rxvt) export LC_ALL=ru_RU.UTF-8;;
+	*xterm*|rxvt) export LC_ALL=en_US.UTF_8;;
 esac
 
 autoload -U compinit
@@ -74,6 +74,15 @@ case ${OSTYPE} in
 	# Actually I use ubuntu
 	Linux)
 		PATH=${PATH}:/usr/local/sbin:/usr/sbin:/sbin
+		if [ -f /etc/arch-release ]
+		then
+			LINUX_DISTRO="ArchLinux"
+		elif [ -f /etc/gentoo-release ]
+		then
+			LINUX_DISTRO="Gentoo"
+		else
+			LINUX_DISTRO=""
+		fi
 	;;
 	FreeBSD)
 		PATH=${PATH}:/usr/sbin:/sbin:/usr/local/sbin

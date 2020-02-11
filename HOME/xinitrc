@@ -13,7 +13,7 @@ elif [ $OSTYPE = "Linux" ];then
 	#For Gentoo Linux
 		sysresources=/etc/X11/xinit/Xresources
 		sysmodmap=/etc/X11/xinit/Xmodmap
-		TZ='Asia/Krasnoyarsk';export TZ
+		TZ='Europe/Moscow';export TZ
 	else
 		echo "ech..."
 		exit 0
@@ -69,8 +69,9 @@ fi
 #exec xterm -geometry 60x30+400+0 -name login 
 #exec xterm -geometry 60x30+400+0 -name ololo
 
+#xinput --set-prop 'TPPS/2 IBM TrackPoint' 'libinput Accel Speed' 1 & # setup speed trackpad
 exec xautolock -time 10 -locker slock &
 #exec xscreensaver -no-splash &
 setxkbmap -layout "us,ru" -option "grp:caps_toggle,terminate:ctrl_alt_bksp" &
 export I3SOCK=${HOME}/.i3/i3.socket
-exec /usr/local/bin/i3
+exec /usr/bin/i3
