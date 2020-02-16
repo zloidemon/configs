@@ -9,10 +9,12 @@
 # layout, use the i3-config-wizard
 #
 
-assign [class="Firefox"]        → 2:www
+assign [class="Mozilla Firefox"]        → 2:www
 assign [class="KeePassX"]       → 2:www
 assign [class="Opera"]          → 2:www
 assign [class="Skype"]          → 3:im
+assign [class="Telegram"]       → 3:im
+assign [class="Slack"]          → 3:im
 
 # font for window titles. ISO 10646 = Unicode
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -177,4 +179,6 @@ bar {
 #
 # Please remove the following exec line:
 #######################################################################
-exec i3-config-wizard
+# exec --no-startup-id nm-applet
+# exec i3-config-wizard
+
