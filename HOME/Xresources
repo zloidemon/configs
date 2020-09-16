@@ -33,8 +33,8 @@ URxvt.saveLines: 2500
 URxvt.perl-ext-common:  default,tabbed,matcher,clipboard
 URxvt*termName: rxvt
 URxvt.clipboard.autocopy: true
-URxvt.keysym.M-C-c: perl:clipboard:copy
-URxvt.keysym.M-C-v: perl:clipboard:paste
+!URxvt.keysym.Shift-Control-c: perl:clipboard:copy
+!URxvt.keysym.Shift-Control-v: perl:clipboard:paste
 
 urxvt.color15: #283C77
 

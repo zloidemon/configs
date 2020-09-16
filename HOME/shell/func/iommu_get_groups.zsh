@@ -8,4 +8,7 @@ iommu_get_groups() {
 		done;
 	done;
 }
+virt_host_validate() {
+	virt-host-validate;
+}
 fi
