@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+cgexec -g memory,cpu:desktop/telegram /usr/bin/telegram-desktop
