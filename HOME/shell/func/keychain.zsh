@@ -10,7 +10,7 @@ keyload()
 	local _key
 	_key=${1}
 	echo "[keyload]: start loading ${_key}"
-	if [ ${OSTYPE} != 'Darwin' ] | [  ${USER} != 'root' ]
+	if [ ${OSTYPE} != 'Darwin' ] | [ ${USER} != 'root' ]
 	then
 		which keychain 2>/dev/null >/dev/null && eval $(keychain --quiet --eval ${_key})
 	else
