@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
+# vim: set et sw=4 ts=4:
+
 PATH=${PATH}:${HOME}/Devel/node/current/bin
 
 if [ -d ${HOME}/.npm-packages ]
 then
-	PATH=${PATH}:${HOME}/.npm-packages/bin
+    PATH=${PATH}:${HOME}/.npm-packages/bin
 fi
 
 # SOME ANDROID SHIT

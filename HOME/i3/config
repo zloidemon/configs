@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# vim: set et sw=4 ts=4:
+
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
@@ -15,6 +18,7 @@ assign [class="Opera"]          → 2:www
 assign [class="Skype"]          → 3:im
 assign [class="Telegram"]       → 3:im
 assign [class="Slack"]          → 3:im
+assign [class="zoom"]           → 3:im
 assign [class="steam_app_*"]    → 4:box
 assign [class="Steam"]          → 6:steam
 
@@ -176,7 +180,8 @@ bindsym Mod1+Shift+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+#        status_command i3status
+	status_command cd ~/.config/luastatus && exec luastatus-i3-wrapper -B no_separators battery.lua alsa-interactive-gauge.lua mem-usage.lua time-date.lua xkb.lua
 }
 
 #######################################################################

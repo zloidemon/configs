@@ -1,6 +1,11 @@
 #!/bin/sh
 
-OSTYPE=`uname -s`
+# -*- coding: utf-8 -*-
+# vim: set et sw=4 ts=4:
+
+OSTYPE=$(uname -s)
+
+PATH=$PATH:$HOME/.opt/bin:$HOME/.opt/sbin
 
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
@@ -17,6 +22,9 @@ then
         sysresources=/etc/X11/xinit/Xresources
         sysmodmap=/etc/X11/xinit/Xmodmap
         TZ='Europe/Moscow'; export TZ
+    elif [ -f /etc/arch-release ]
+    then
+        true
     else
         echo "Unknown Linux distro continue loading"
     fi
@@ -85,6 +93,7 @@ fi
 #xinput --set-prop 'TPPS/2 IBM TrackPoint' 'libinput Accel Speed' 1 & # setup speed trackpad
 #exec xautolock -time 10 -locker slock &
 #exec xscreensaver -no-splash &
+
 setxkbmap -layout "us,ru" -option "grp:caps_toggle,terminate:ctrl_alt_bksp" &
 export I3SOCK=${HOME}/.i3/i3.socket
 exec /usr/bin/i3
