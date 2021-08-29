@@ -5,13 +5,41 @@ OSTYPE=`uname -s`
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 
+if [ $OSTYPE = "FreeBSD" ]
+then
+    sysresources=/usr/X11R6/lib/X11/xinit/.Xresources
+    sysmodmap=/usr/X11R6/lib/X11/xinit/.Xmodmap
+elif [ $OSTYPE = "Linux" ]
+then
+    #For Gentoo Linux
+    if [ -f /etc/gentoo-release ]
+    then
+        sysresources=/etc/X11/xinit/Xresources
+        sysmodmap=/etc/X11/xinit/Xmodmap
+        TZ='Europe/Moscow'; export TZ
+    else
+        echo "Unknown Linux distro continue loading"
+    fi
+else
+    echo "Unknown OS ${OSTYPE} continue loading"
+fi
+
 # merge in defaults and keymaps
 
-#export LD_LIBRARY_PATH="/opt/amdgpu-pro/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH}"
-#export LIBGL_DRIVERS_PATH="$PACKAGEPATH/usr/lib/x86_64-linux-gnu/dri/"
-#export dri_driver="amdgpu"
-export LC_ALL=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
+for l in en_US C
+do
+    _LOCALE=$(locale -a | fgrep $l)
+    if [ "x${_LOCALE}" = "x" ]
+    then
+        continue
+    else
+        echo "Setting up ${_LOCALE} locale"
+        export LC_ALL=${_LOCALE}
+        export LC_CTYPE=${_LOCALE}
+
+        break
+    fi
+done
 
 if [ -f $sysresources ]; then
     xrdb -merge $sysresources
@@ -57,7 +85,6 @@ fi
 #xinput --set-prop 'TPPS/2 IBM TrackPoint' 'libinput Accel Speed' 1 & # setup speed trackpad
 #exec xautolock -time 10 -locker slock &
 #exec xscreensaver -no-splash &
-
 setxkbmap -layout "us,ru" -option "grp:caps_toggle,terminate:ctrl_alt_bksp" &
 export I3SOCK=${HOME}/.i3/i3.socket
 exec /usr/bin/i3
