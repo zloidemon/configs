@@ -5,28 +5,13 @@ OSTYPE=`uname -s`
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 
-if [ $OSTYPE = "FreeBSD" ];then
-	sysresources=/usr/X11R6/lib/X11/xinit/.Xresources
-	sysmodmap=/usr/X11R6/lib/X11/xinit/.Xmodmap
-elif [ $OSTYPE = "Linux" ];then
-	if [ -f /etc/gentoo-release ];then
-	#For Gentoo Linux
-		sysresources=/etc/X11/xinit/Xresources
-		sysmodmap=/etc/X11/xinit/Xmodmap
-		TZ='Europe/Moscow';export TZ
-	else
-		echo "ech..."
-		exit 0
-	fi
-else
-	echo "ech..."
-	exit 0
-fi
-
 # merge in defaults and keymaps
 
-export LC_ALL=ru_RU.UTF-8
-export LC_CTYPE=ru_RU.UTF-8
+#export LD_LIBRARY_PATH="/opt/amdgpu-pro/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH}"
+#export LIBGL_DRIVERS_PATH="$PACKAGEPATH/usr/lib/x86_64-linux-gnu/dri/"
+#export dri_driver="amdgpu"
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
 
 if [ -f $sysresources ]; then
     xrdb -merge $sysresources
@@ -70,8 +55,9 @@ fi
 #exec xterm -geometry 60x30+400+0 -name ololo
 
 #xinput --set-prop 'TPPS/2 IBM TrackPoint' 'libinput Accel Speed' 1 & # setup speed trackpad
-exec xautolock -time 10 -locker slock &
+#exec xautolock -time 10 -locker slock &
 #exec xscreensaver -no-splash &
+
 setxkbmap -layout "us,ru" -option "grp:caps_toggle,terminate:ctrl_alt_bksp" &
 export I3SOCK=${HOME}/.i3/i3.socket
 exec /usr/bin/i3

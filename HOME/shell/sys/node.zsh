@@ -6,5 +6,5 @@ then
 fi
 
 # SOME ANDROID SHIT
-export ANDROID_HOME=${HOME}/Devel/Android/current
-PATH=${PATH}:${HOME}/Devel/Android/current/tools
+export ANDROID_HOME=/opt/android-sdk
+PATH=${PATH}:/opt/android-sdk/tools
