@@ -9,12 +9,21 @@
 # layout, use the i3-config-wizard
 #
 
-assign [class="Mozilla Firefox"]        → 2:www
+assign [class="firefox"]        → 2:www
 assign [class="KeePassX"]       → 2:www
 assign [class="Opera"]          → 2:www
 assign [class="Skype"]          → 3:im
 assign [class="Telegram"]       → 3:im
 assign [class="Slack"]          → 3:im
+assign [class="steam_app_*"]    → 4:box
+assign [class="Steam"]          → 6:steam
+
+for_window [class="steam_app_*"]    floating enable # Steam
+for_window [class="EVE*"]           floating enable # Steam
+for_window [class="Steam"]          floating enable # Steam
+for_window [window_role="About"]    floating enable
+for_window [class="EXANTE.*"]       floating enable
+for_window [class="vlc"]            floating enable
 
 # font for window titles. ISO 10646 = Unicode
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -82,7 +91,7 @@ bindsym Mod1+w layout tabbed
 bindsym Mod1+e layout default
 
 # toggle tiling / floating
-bindsym Mod1+Shift+Backspace floating toggle
+bindsym Mod1+Shift+65 floating toggle
 
 # change focus between tiling / floating windows
 bindsym Mod1+space focus mode_toggle
@@ -97,9 +106,9 @@ bindsym Mod1+a focus parent
 bindsym Mod1+1 workspace 1
 bindsym Mod1+2 workspace 2:www
 bindsym Mod1+3 workspace 3:im
-bindsym Mod1+4 workspace 4
+bindsym Mod1+4 workspace 4:box
 bindsym Mod1+5 workspace 5
-bindsym Mod1+6 workspace 6
+bindsym Mod1+6 workspace 6:steam
 bindsym Mod1+7 workspace 7
 bindsym Mod1+8 workspace 8
 bindsym Mod1+9 workspace 9
@@ -109,9 +118,9 @@ bindsym Mod1+0 workspace 10
 bindsym Mod1+Shift+1 move workspace 1
 bindsym Mod1+Shift+2 move workspace 2:www
 bindsym Mod1+Shift+3 move workspace 3:im
-bindsym Mod1+Shift+4 move workspace 4
+bindsym Mod1+Shift+4 move workspace 4:box
 bindsym Mod1+Shift+5 move workspace 5
-bindsym Mod1+Shift+6 move workspace 6
+bindsym Mod1+Shift+6 move workspace 6:steam
 bindsym Mod1+Shift+7 move workspace 7
 bindsym Mod1+Shift+8 move workspace 8
 bindsym Mod1+Shift+9 move workspace 9
@@ -120,7 +129,7 @@ bindsym Mod1+Shift+0 move workspace 10
 # reload the configuration file
 bindsym Mod1+Shift+C reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym Mod1+Shift+space restart
+#bindsym Mod1+Shift+space restart
 # exit i3 (logs you out of your X session)
 bindsym Mod1+Shift+e exit
 
@@ -181,4 +190,5 @@ bar {
 #######################################################################
 # exec --no-startup-id nm-applet
 # exec i3-config-wizard
-
+exec --no-startup-id nm-applet
+exec flameshot
