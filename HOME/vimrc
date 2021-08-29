@@ -333,11 +333,12 @@ au BufRead,BufNewFile *.t set filetype=lua
 au FileType python setl tabstop=4 shiftwidth=4 expandtab
 au FileType lua setl tabstop=4 shiftwidth=4 expandtab
 au FileType erlang setl tabstop=4 shiftwidth=4 expandtab
-au FileType go setl tabstop=4 shiftwidth=4 expandtab
+"au FileType go setl tabstop=4 shiftwidth=4 expandtab
 au FileType swift setl tabstop=4 shiftwidth=4 expandtab
 au FileType yaml setl tabstop=2 shiftwidth=2 expandtab
 au FileType html setl tabstop=2 shiftwidth=2 expandtab
 au FileType javascript setl tabstop=4 shiftwidth=4 expandtab
+au BufNewFile,BufRead Jenkinsfile setf groovy
 
 "au FileType javascript call JavaScriptFold2()
 "au FileType javascript setl fen
