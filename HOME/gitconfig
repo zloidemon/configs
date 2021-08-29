@@ -19,3 +19,5 @@
 	added = green
 	changed = yellow
 	untracked = yellow
+[init]
+	defaultBranch = master
