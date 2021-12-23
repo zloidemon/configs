@@ -1,0 +1,5 @@
+{
+	"*scrollBar": true,
+	"*locale": true,
+	"*saveLines": 1000
+}

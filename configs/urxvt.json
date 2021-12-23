@@ -1,0 +1,19 @@
+{
+	"*scrollBar": false,
+	"*scrollBar_right": true,
+	"*urgentOnBell": false,
+	".matcher.button": 1,
+	"*transparent": false,
+	"*shading": 30,
+	"*jumpScroll": true,
+	"*perl-ext": "tabbed",
+	".saveLines": 2500,
+	".perl-ext-common":  "default,tabbed,matcher,clipboard",
+	"*termName": "rxvt",
+	".clipboard.autocopy": true,
+	".tabbed.tabbar-fg": 2,
+	".tabbed.tabbar-bg": 15,
+	".tabbed.tab-fg": 3,
+	".tabbed.tab-bg": 15,
+	".color15": "#283C77"
+}

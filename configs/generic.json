@@ -1,0 +1,14 @@
+{
+	"font": {
+		"name": "UbuntuMono",
+		"size": 12
+	},
+	"colors": {
+		"background": "#283C77",
+		"foreground": "#FFFFFF",
+		"url": "#0FB62C"
+	},
+	"browser": {
+		"application": "firefox"
+	}
+}

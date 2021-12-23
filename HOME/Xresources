@@ -1,44 +1,36 @@
-XTerm*faceName: UbuntuMono 
-XTerm*faceSize: 12
-XTerm*scrollBar: True
+Xft.dpi: 150
+Xft.antialias: true
+Xft.rgba: rgb
+Xft.hinting: true
+Xft.hintstyle: hintslight
+XTerm*scrollBar: true
 XTerm*locale: true
 XTerm*saveLines: 1000
-XTerm*background: black
-XTerm*foreground: white
-
-Xft.dpi: 150
-Xft.antialias:              true
-Xft.rgba:                   rgb
-Xft.hinting:                true
-Xft.hintstyle:              hintslight
-
-Xcursor.theme: Human
-
-URxvt*background: #283C77
-URxvt*foreground: #FFFFFF
+XTerm*background: #283C77
+XTerm*foreground: #FFFFFF
+XTerm*faceName: UbuntuMono
+XTerm*faceSize: 12
 URxvt*scrollBar: false
-URxvt*scrollBar_right: true 
+URxvt*scrollBar_right: true
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
 URxvt*urgentOnBell: false
-!URxvt*font: xft:Terminus:Fixed:pixelsize=14:autohint=true:antialias=true:hinting=true
-URxvt*font: xft:UbuntuMono:size=10:antialias=true:hinting=true
-URxvt*boldFont: xft:UbuntuMono:size=10:weight=bold
-URxvt.matcher.button  : 1
-URxvt.colorUL: #0FB62C
-URxvt.urlLauncher: firefox
+URxvt.matcher.button: 1
 URxvt*transparent: false
-URxvt*shading: 30 
+URxvt*shading: 30
 URxvt*jumpScroll: true
 URxvt*perl-ext: tabbed
 URxvt.saveLines: 2500
-URxvt.perl-ext-common:  default,tabbed,matcher,clipboard
+URxvt.perl-ext-common: default,tabbed,matcher,clipboard
 URxvt*termName: rxvt
 URxvt.clipboard.autocopy: true
-!URxvt.keysym.Shift-Control-c: perl:clipboard:copy
-!URxvt.keysym.Shift-Control-v: perl:clipboard:paste
-
-urxvt.color15: #283C77
-
 URxvt.tabbed.tabbar-fg: 2
-URxvt.tabbed.tabbar-bg:15
+URxvt.tabbed.tabbar-bg: 15
 URxvt.tabbed.tab-fg: 3
 URxvt.tabbed.tab-bg: 15
+URxvt*background: #283C77
+URxvt*foreground: #FFFFFF
+URxvt.colorUL: #0FB62C
+URxvt.font: xft:Noto Mono for Powerline:style=Regular:size=10:antialias=true:hinting=true
+URxvt.urlLauncher: firefox
