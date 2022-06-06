@@ -29,6 +29,7 @@ for_window [window_role="About"]    floating enable
 for_window [class="EXANTE.*"]       floating enable
 for_window [class="vlc"]            floating enable
 for_window [class="org-knopflerfish-framework-BundleThread"]            floating enable # Freeplane
+for_window [class="rdesktop"]       floating enable
 
 # font for window titles. ISO 10646 = Unicode
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
