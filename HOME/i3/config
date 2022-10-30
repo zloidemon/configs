@@ -189,7 +189,7 @@ bindsym Mod4+Shift+r mode "resize"
 # finds out, if available)
 bar {
 #        status_command i3status
-	status_command cd ~/.config/luastatus && exec luastatus-i3-wrapper -B battery.lua no_separators alsa-interactive-gauge.lua mem-usage.lua time-date.lua xkb.lua
+	status_command cd ~/.config/luastatus && exec luastatus-i3-wrapper -B no_separators battery.lua alsa-interactive-gauge.lua mem-usage.lua time-date.lua xkb.lua
 }
 
 #######################################################################
