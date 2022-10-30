@@ -15,21 +15,27 @@
 assign [class="firefox"]        → 2:www
 assign [class="KeePassX"]       → 2:www
 assign [class="Opera"]          → 2:www
+
 assign [class="Skype"]          → 3:im
 assign [class="Telegram"]       → 3:im
 assign [class="Slack"]          → 3:im
 assign [class="zoom"]           → 3:im
+
 assign [class="steam_app_*"]    → 4:box
 assign [class="Steam"]          → 6:steam
 
+# Floating windows
+
+# games
 for_window [class="steam_app_*"]    floating enable # Steam
-for_window [class="EVE*"]           floating enable # Steam
 for_window [class="Steam"]          floating enable # Steam
+for_window [class="PCSX2"]          floating enable
+
+# tools
 for_window [window_role="About"]    floating enable
-for_window [class="EXANTE.*"]       floating enable
 for_window [class="vlc"]            floating enable
-for_window [class="org-knopflerfish-framework-BundleThread"]            floating enable # Freeplane
 for_window [class="rdesktop"]       floating enable
+for_window [class="org-knopflerfish-framework-BundleThread"] floating enable # Freeplane
 
 # font for window titles. ISO 10646 = Unicode
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -109,7 +115,7 @@ bindsym Mod4+a focus parent
 #bindsym Mod4+d focus child
 
 # switch to workspace
-bindsym Mod4+1 workspace 1
+bindsym Mod4+1 workspace 1:terminal
 bindsym Mod4+2 workspace 2:www
 bindsym Mod4+3 workspace 3:im
 bindsym Mod4+4 workspace 4:box
@@ -121,7 +127,7 @@ bindsym Mod4+9 workspace 9
 bindsym Mod4+0 workspace 10
 
 # move focused container to workspace
-bindsym Mod4+Shift+1 move workspace 1
+bindsym Mod4+Shift+1 move workspace 1:terminal
 bindsym Mod4+Shift+2 move workspace 2:www
 bindsym Mod4+Shift+3 move workspace 3:im
 bindsym Mod4+Shift+4 move workspace 4:box
@@ -183,7 +189,7 @@ bindsym Mod4+Shift+r mode "resize"
 # finds out, if available)
 bar {
 #        status_command i3status
-	status_command cd ~/.config/luastatus && exec luastatus-i3-wrapper -B no_separators battery.lua alsa-interactive-gauge.lua mem-usage.lua time-date.lua xkb.lua
+	status_command cd ~/.config/luastatus && exec luastatus-i3-wrapper -B battery.lua no_separators alsa-interactive-gauge.lua mem-usage.lua time-date.lua xkb.lua
 }
 
 #######################################################################
