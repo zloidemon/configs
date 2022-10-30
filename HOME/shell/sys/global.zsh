@@ -2,6 +2,8 @@
 export XZ_OPT=-9v
 
 #GREP
+export GREP_COLORS='mt=1;31'
+# Deprecated for new versions
 export GREP_COLOR='1;31'
 
 #LS
@@ -14,9 +16,10 @@ zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 alias ls='ls -GF'
 alias ll='ls -lh'
 alias la='ls -A'
-alias lt="ls -lt"
-alias lll="ls -lL"
+alias lt='ls -lt'
+alias lll='ls -lL'
 alias home='cd ~'
+alias fgrep='grep -F'
 
 #EDITORS
 export EDITOR=vim
