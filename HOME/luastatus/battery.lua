@@ -36,7 +36,7 @@ else
         plugin = 'timer',
         cb = function()
             return {
-                {full_text = 'AC ', color = '#595959'},
+                {full_text = 'AC ', color = '#eab93d'},
             }
         end,
     }
