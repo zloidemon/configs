@@ -2,7 +2,7 @@ widget = nil
 local battery_id = nil
 
 for i=0,10 do
-    local st = io.open('/sys/class/power_supply/BAT' .. i)
+    local st = io.open('/sys/class/power_supply/BAT' .. i, 'r')
 
     if st then
         battery_id = i
@@ -34,13 +34,10 @@ if battery_id ~= nil then
 else
     widget = {
         plugin = 'timer',
-        opts = {},
         cb = function()
             return {
-                full_text = 'AC',
-                color = '#595959',
+                {full_text = 'AC ', color = '#595959'},
             }
         end,
-        event = function(t) end,
-}
+    }
 end
