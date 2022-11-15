@@ -15,10 +15,12 @@ months = {
 widget = {
     plugin = 'timer',
     cb = function()
-        local d = os.date('*t')
+        local loc = os.date('*t')
+        local gmt = os.date('!*t')
         return {
-            {full_text = string.format('%d %s', d.day, months[d.month])},
-            {full_text = string.format('%d:%02d', d.hour, d.min)},
+            {full_text = string.format('%d %s', loc.day, months[loc.month])},
+            {full_text = string.format('%d:%02d', loc.hour, loc.min)},
+            {full_text = string.format('%d:%02d', gmt.hour, gmt.min), color = '#9c9c9c'},
         }
     end,
 }
