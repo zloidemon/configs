@@ -10,14 +10,14 @@ PATH=${PATH}:${HOME}/.opt/bin:${HOME}/.opt/sbin
 _X_USER_RESOURCES=${HOME}/.Xresources
 _X_USER_MODMAP=${HOME}/.Xmodmap
 
-if [ -f "${HOME}/.zsh/func/extract_xresources_value.sh" ]
+if [ -f "${HOME}/.zsh/func/extract_xresources_value" ]
 then
-    source ${HOME}/.zsh/func/extract_xresources_value.sh
+    source ${HOME}/.zsh/func/extract_xresources_value
 fi
 
-if [ -f "${HOME}/.zsh/func/checkbinary.sh" ]
+if [ -f "${HOME}/.zsh/func/checkbinary" ]
 then
-    source ${HOME}/.zsh/func/checkbinary.sh
+    source ${HOME}/.zsh/func/checkbinary
 fi
 
 if [ ${OSTYPE} = "FreeBSD" ]
