@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# vim: set et sw=4 ts=4:
+
 hash -d docs=~/Documents
 hash -d desktop=~/Desktop
 hash -d devel=~/Devel

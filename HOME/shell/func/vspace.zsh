@@ -1,62 +1,63 @@
-vspace()
-{
-	if ! [ $# -eq 2 ]
-	then
-		echo "[vspace]: usage"
-		echo "   vspace IMG space_name"
-		return 0
-	fi
+# -*- coding: utf-8 -*-
+# vim: set et sw=4 ts=4:
 
-	local _image _vspace
+function vspace() {
+    if ! [ $# -eq 2 ]
+    then
+        echo "[vspace]: usage"
+        echo "   vspace IMG space_name"
+        return 0
+    fi
 
-	_image=${1}
-	_vspace=${2}
+    local _image _vspace
 
-	echo "[vspace]: set up space ${_vspace}"
+    _image=${1}
+    _vspace=${2}
 
-	if [ ${USER} = 'root' ]
-	then
-		echo "[vspace]: please use non ${USER} user"
-		return 0
-	else
-		local _mounted_space _mounted_image
+    echo "[vspace]: set up space ${_vspace}"
 
-		_mounted_space=$(veracrypt -t -l 2> /dev/null|fgrep ${_vspace})
-		_mounted_image=$(veracrypt -t -l 2> /dev/null|fgrep ${_image})
+    if [ ${USER} = 'root' ]
+    then
+        echo "[vspace]: please use non ${USER} user"
+        return 0
+    else
+        local _mounted_space _mounted_image
 
-		if [ "x${_mounted_space}" != "x" ]
-		then
-			echo "[vspace]: space ${_vspace} already mounted"
-			echo "${_mounted_space}"
-			return 0
-		fi
+        _mounted_space=$(veracrypt -t -l 2> /dev/null|fgrep ${_vspace})
+        _mounted_image=$(veracrypt -t -l 2> /dev/null|fgrep ${_image})
 
-		if [ "x${_mounted_image}" != "x" ]
-		then
-			echo "[vspace]: image ${_image} already mounted"
-			echo "${_mounted_image}"
-			return 0
-		fi
+        if [ "x${_mounted_space}" != "x" ]
+        then
+            echo "[vspace]: space ${_vspace} already mounted"
+            echo "${_mounted_space}"
+            return 0
+        fi
 
-		if ! [ -f ${_image} ]
-		then
-			echo "[vspace]: image ${_image} not found"
-			return 0
-		fi 
+        if [ "x${_mounted_image}" != "x" ]
+        then
+            echo "[vspace]: image ${_image} already mounted"
+            echo "${_mounted_image}"
+            return 0
+        fi
 
-		if ! [ -d ${_vspace} ]
-		then
-			mkdir -p ${_vspace}
-		fi
+        if ! [ -f ${_image} ]
+        then
+            echo "[vspace]: image ${_image} not found"
+            return 0
+        fi
 
-		if [ -d ${_vspace} ]
-		then
-			veracrypt -t ${_image} ${_vspace}
-			veracrypt -t -l
-		else
-			echo "[vspace]: space dir ${_vspace} not found"
-			return 0
-		fi
+        if ! [ -d ${_vspace} ]
+        then
+            mkdir -p ${_vspace}
+        fi
 
-	fi
+        if [ -d ${_vspace} ]
+        then
+            veracrypt -t ${_image} ${_vspace}
+            veracrypt -t -l
+        else
+            echo "[vspace]: space dir ${_vspace} not found"
+            return 0
+        fi
+    fi
 }

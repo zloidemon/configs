@@ -1,14 +1,19 @@
+# -*- coding: utf-8 -*-
+# vim: set et sw=4 ts=4:
+
 if [ "${OSTYPE}" = "Linux" ]
 then
-iommu_get_groups() {
-	for g in /sys/kernel/iommu_groups/*; do
-		echo "IOMMU Group ${g##*/}:"
-		for d in $g/devices/*; do
-			echo -e "\t$(lspci -nns ${d##*/})"
-		done;
-	done;
-}
-virt_host_validate() {
-	virt-host-validate;
-}
+    iommu_get_groups() {
+        for g in /sys/kernel/iommu_groups/*
+        do
+            echo "IOMMU Group ${g##*/}:"
+            for d in ${g}/devices/*
+            do
+                echo -e "\t$(lspci -nns ${d##*/})"
+            done
+        done
+    }
+    virt_host_validate() {
+        virt-host-validate;
+    }
 fi

@@ -1,35 +1,37 @@
-#!/bin/sh
+# -*- coding: utf-8 -*-
+# vim: set et sw=4 ts=4:
 
-#PRG	"upscreen"
-#INF	"screenshot uploader"
-
-if [ $OSTYPE != 'Darwin' ];then
-	ZHELP_DEP=$ZHELP_DEP" scrot"
+if [ ${OSTYPE} != 'Darwin' ];then
+    ZHELP_DEP=${ZHELP_DEP}" scrot"
 fi
 
-upscreen() {
-	DATE=`date '+%Y-%m-%d_%H:%M:%S'`
-	SCREEN="screenshot-${DATE}.png"
-	timer(){
-		for i in `jot 5 1 5`;do
-			echo -n "\033[3${i}m ${i} \033[0m"' '
-			sleep 1
-		done
-	}
+function upscreen() {
+    DATE=$(date '+%Y-%m-%d_%H:%M:%S')
+    SCREEN="screenshot-${DATE}.png"
 
-	if [ -d $HOME/Pictures ];then
-		DSCS="$HOME/Pictures"
-	else
-		DSCS="$HOME"
-	fi
+    timer() {
+        for i in $(jot 5 1 5)
+        do
+            echo -n "\033[3${i}m ${i} \033[0m"' '
+            sleep 1
+        done
+    }
 
-	if [ $OSTYPE = 'Darwin' ];then
-		timer
-		screencapture -tpng -i $DSCS/$SCREEN
-	else
-		timer
-		scrot -b -q 0 $DSCS/$SCREEN
-	fi
+    if [ -d ${HOME}/Pictures ]
+    then
+        DSCS="${HOME}/Pictures"
+    else
+        DSCS="${HOME}"
+    fi
 
-	uppic $DSCS/$SCREEN
+    if [ ${OSTYPE} = 'Darwin' ]
+    then
+        timer
+        screencapture -tpng -i ${DSCS}/${SCREEN}
+    else
+        timer
+        scrot -b -q 0 ${DSCS}/${SCREEN}
+    fi
+
+    uppic ${DSCS}/${SCREEN}
 }
