@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-export QT_SCALE_FACTOR=0
+unset QT_SCALE_FACTOR
 cgexec -g memory,cpu:desktop/telegram /usr/bin/telegram-desktop
