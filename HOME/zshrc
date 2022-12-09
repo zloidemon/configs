@@ -71,7 +71,6 @@ else
 fi
 
 case ${OSTYPE} in
-    # Actually I use ubuntu
     Linux)
         PATH=${PATH}:/usr/local/sbin:/usr/sbin:/sbin
         if [ -f /etc/arch-release ]

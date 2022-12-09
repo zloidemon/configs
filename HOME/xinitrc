@@ -32,7 +32,8 @@ then
         _X_SYS_MODMAP=/etc/X11/xinit/Xmodmap
     elif [ -f /etc/arch-release ]
     then
-        true
+        _X_SYS_RESOURCES=/etc/X11/xinit/.Xresources
+        _X_SYS_MODMAP=/etc/X11/xinit/.Xmodmap
     else
         echo "unknown Linux distro continue loading"
     fi
