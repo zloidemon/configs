@@ -34,3 +34,16 @@ URxvt*foreground: #FFFFFF
 URxvt.colorUL: #0FB62C
 URxvt.font: xft:Noto Mono for Powerline:style=Regular:size=10:antialias=true:hinting=true
 URxvt.urlLauncher: firefox
+
+User.screen.x.manager: i3
+User.screen.x.lock: 10
+User.screen.x.locker: slock
+User.screen.scale: 0.75
+User.i3.socket: i3.socket
+User.java.options: -Dawt.useSystemAAFontSettings=on
+User.java.awt.wm.nonreparenting: 1
+User.java.awt.toolkit: MToolkit
+User.system.timezone: Europe/Moscow
+User.system.keyboard.layout: us,ru
+User.system.keyboard.grp: caps_toggle
+User.android.home: /opt/android-sdk

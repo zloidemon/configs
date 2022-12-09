@@ -5,43 +5,52 @@
 
 OSTYPE=$(uname -s)
 
-PATH=$PATH:$HOME/.opt/bin:$HOME/.opt/sbin
+PATH=${PATH}:${HOME}/.opt/bin:${HOME}/.opt/sbin
 
-userresources=$HOME/.Xresources
-usermodmap=$HOME/.Xmodmap
+_X_USER_RESOURCES=${HOME}/.Xresources
+_X_USER_MODMAP=${HOME}/.Xmodmap
 
-if [ $OSTYPE = "FreeBSD" ]
+if [ -f "${HOME}/.zsh/func/extract_xresources_value" ]
 then
-    sysresources=/usr/X11R6/lib/X11/xinit/.Xresources
-    sysmodmap=/usr/X11R6/lib/X11/xinit/.Xmodmap
-elif [ $OSTYPE = "Linux" ]
+    source ${HOME}/.zsh/func/extract_xresources_value
+fi
+
+if [ -f "${HOME}/.zsh/func/checkbinary" ]
 then
-    #For Gentoo Linux
+    source ${HOME}/.zsh/func/checkbinary
+fi
+
+if [ ${OSTYPE} = "FreeBSD" ]
+then
+    _X_SYS_RESOURCES=/usr/X11R6/lib/X11/xinit/.Xresources
+    _X_SYS_MODMAP=/usr/X11R6/lib/X11/xinit/.Xmodmap
+elif [ ${OSTYPE} = "Linux" ]
+then
     if [ -f /etc/gentoo-release ]
     then
-        sysresources=/etc/X11/xinit/Xresources
-        sysmodmap=/etc/X11/xinit/Xmodmap
-        TZ='Europe/Moscow'; export TZ
+        _X_SYS_RESOURCES=/etc/X11/xinit/Xresources
+        _X_SYS_MODMAP=/etc/X11/xinit/Xmodmap
     elif [ -f /etc/arch-release ]
     then
-        true
+        _X_SYS_RESOURCES=/etc/X11/xinit/.Xresources
+        _X_SYS_MODMAP=/etc/X11/xinit/.Xmodmap
     else
-        echo "Unknown Linux distro continue loading"
+        echo "unknown Linux distro continue loading"
     fi
 else
-    echo "Unknown OS ${OSTYPE} continue loading"
+    echo "unknown OS ${OSTYPE} continue loading"
 fi
 
 # merge in defaults and keymaps
 
 for l in en_US C
 do
-    _LOCALE=$(locale -a | fgrep $l)
+    _LOCALE=$(locale -a | fgrep ${l})
     if [ "x${_LOCALE}" = "x" ]
     then
         continue
     else
-        echo "Setting up ${_LOCALE} locale"
+        echo "setting up ${_LOCALE} locale"
         export LC_ALL=${_LOCALE}
         export LC_CTYPE=${_LOCALE}
 
@@ -49,20 +58,105 @@ do
     fi
 done
 
-if [ -f $sysresources ]; then
-    xrdb -merge $sysresources
+if [ -f "${_X_SYS_RESOURCES}" ]
+then
+    xrdb -merge ${_X_SYS_RESOURCES}
 fi
 
-if [ -f $sysmodmap ]; then
-    xmodmap $sysmodmap
+if [ -f "${_X_SYS_MODMAP}" ]
+then
+    xmodmap ${_X_SYS_MODMAP}
 fi
 
-if [ -f $userresources ]; then
-    xrdb -merge $userresources
+if [ -f "${_X_USER_RESOURCES}" ]
+then
+    xrdb -merge ${_X_USER_RESOURCES}
 fi
 
-if [ -f $usermodmap ]; then
-    xmodmap $usermodmap
+if [ -f "${_X_USER_MODMAP}" ]
+then
+    xmodmap ${_X_USER_MODMAP}
+fi
+
+# Setup settings apps
+
+function setup_setxkbmap() {
+    local _X_KEYBOARD_LAYOUT=${1}
+    local _X_KEYBOARD_GRP=${2}
+
+    if _checkbinary setxkbmap
+    then
+        exec setxkbmap \
+            -layout "${_X_KEYBOARD_LAYOUT}" \
+            -option "grp:${_X_KEYBOARD_GRP},terminate:ctrl_alt_bksp" &
+    fi
+}
+
+function setup_xautolock() {
+    local _X_SCREEN_LOCKER=${1}
+    local _X_SCREEN_LOCK=${2}
+
+    if _checkbinary xautolock
+    then
+        if _checkbinary ${_X_SCREEN_LOCKER}
+        then
+            exec xautolock -time ${_X_SCREEN_LOCK} \
+                -locker ${_X_SCREEN_LOCKER} &
+        else
+            echo "locker ${_X_SCREEN_LOCKER} not found"
+        fi
+    fi
+}
+
+function setup_exports() {
+    export TZ=$(exv system.timezone)
+    export QT_SCALE_FACTOR=$(exv screen.scale)
+
+    # Setup Java options
+    export _JAVA_OPTIONS=$(exv java.options)
+    export _JAVA_AWT_WM_NONREPARENTING=$(exv java.awt.wm.nonreparenting)
+    export AWT_TOOLKIT=$(exv java.awt.toolkit)
+
+    # Setup Android
+    export ANDROID_HOME=$(exv android.home)
+    if [ "x${ANDROID_HOME}" != "x" ]
+    then
+        PATH=${PATH}:${ANDROID_HOME}/tools
+    fi
+}
+
+function start_wm_i3() {
+    export I3SOCK=${HOME}/.i3/$(exv i3.socket)
+    exec i3
+}
+
+function setup_wm() {
+    _X_SCREEN_MANAGER=${1}
+
+    if _checkbinary ${_X_SCREEN_MANAGER}
+    then
+        case ${_X_SCREEN_MANAGER} in
+            i3) start_wm_i3;;
+            *) echo "window manger ${_X_SCREEN_MANAGER} not found";;
+        esac
+    fi
+}
+
+if [ ${_F_EXTRACT_XRESOURCES_VALUE} -eq 1 ]
+then
+    exv() { extract_xresources_value $*; }
+
+    setup_exports
+
+    setup_setxkbmap \
+        $(exv system.keyboard.layout) \
+        $(exv system.keyboard.grp)
+
+    setup_xautolock \
+        $(exv screen.x.locker) \
+        $(exv screen.x.lock)
+
+    setup_wm $(exv screen.x.manager)
 fi
 
 # start some nice programs
@@ -87,13 +181,7 @@ fi
 #exec feh --bg-scale .bg.jpg &
 #xwinwrap -ni -st -sp -nf -ov -fs -- /usr/local/bin/xscreensaver-hacks/glmatrix -speed 5 -binary -root -window-id WID &
 #twm &
-#exec xterm -geometry 60x30+400+0 -name login 
-#exec xterm -geometry 60x30+400+0 -name ololo
 
 #xinput --set-prop 'TPPS/2 IBM TrackPoint' 'libinput Accel Speed' 1 & # setup speed trackpad
-#exec xautolock -time 10 -locker slock &
 #exec xscreensaver -no-splash &
 
-setxkbmap -layout "us,ru" -option "grp:caps_toggle,terminate:ctrl_alt_bksp" &
-export I3SOCK=${HOME}/.i3/i3.socket
-exec /usr/bin/i3

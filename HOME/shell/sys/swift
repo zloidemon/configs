@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
+# vim: set et sw=4 ts=4:
+
 case ${OSTYPE} in
-	Darwin)
-		export TOOLCHAINS=swift;;
+    Darwin)
+        export TOOLCHAINS=swift;;
 esac
 
 alias spi='swift package init'

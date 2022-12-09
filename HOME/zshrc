@@ -19,21 +19,21 @@ autoload -U colors && colors
 # Gen colors
 for c in cyan green magenta red white yellow
 do
-	local ZCLR_${c}="%{$fg[${c}]%}"
+    local ZCLR_${c}="%{$fg[${c}]%}"
 done
 
 chpwd() {
-	[[ -t 1 ]] || return
-	case $TERM in
-		sun-cmd) print -Pn "\e]l%~\e\\"
-			;;
-		*xterm*|rxvt|(dt|k|E)term) print -Pn "\e]2;%~\a"
-			;;
-	esac
+    [[ -t 1 ]] || return
+    case ${TERM} in
+        sun-cmd) print -Pn "\e]l%~\e\\"
+            ;;
+        *xterm*|rxvt|(dt|k|E)term) print -Pn "\e]2;%~\a"
+            ;;
+    esac
 }
 
-case $TERM in
-	*xterm*|rxvt) export LC_ALL=en_US.UTF_8;;
+case ${TERM} in
+    *xterm*|rxvt) export LC_ALL=en_US.UTF_8;;
 esac
 
 autoload -U compinit
@@ -42,11 +42,11 @@ compinit
 #autocomplite hosts form know_hosts
 
 
-if [ -f $HOME/.ssh/known_hosts ]
+if [ -f ${HOME}/.ssh/known_hosts ]
 then
-	local _myhosts
-	_myhosts='reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
-	zstyle -e ':completion::*:*:*:hosts' hosts ${_myhosts}
+    local _myhosts
+    _myhosts='reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+    zstyle -e ':completion::*:*:*:hosts' hosts ${_myhosts}
 fi
 
 zstyle ':completion::complete:*' use-cache 1
@@ -56,81 +56,80 @@ export HISTSIZE=1000
 # # number of lines saved in the history after logout
 export SAVEHIST=1000
 # # location of history
-export HISTFILE=$HOME/.zhistory
+export HISTFILE=${HOME}/.zhistory
 # append command to history file once executed
 setopt inc_append_history
 
 #PATH
 PATH="/bin:/usr/bin:/usr/local/bin:/usr/bin/X11:/usr/games:${HOME}/.opt/bin"
 
-if [ $SSH_CLIENT ]
+if [ ${SSH_CLIENT} ]
 then
-	CHROOT="${ZCLR_red}SSH${ZCLR_white}|${ZCLR_cyan}"
+    CHROOT="${ZCLR_red}SSH${ZCLR_white}|${ZCLR_cyan}"
 else
-	CHROOT="${ZCLR_cyan}"
+    CHROOT="${ZCLR_cyan}"
 fi
 
 case ${OSTYPE} in
-	# Actually I use ubuntu
-	Linux)
-		PATH=${PATH}:/usr/local/sbin:/usr/sbin:/sbin
-		if [ -f /etc/arch-release ]
-		then
-			LINUX_DISTRO="ArchLinux"
-		elif [ -f /etc/gentoo-release ]
-		then
-			LINUX_DISTRO="Gentoo"
-		else
-			LINUX_DISTRO=""
-		fi
-	;;
-	FreeBSD)
-		PATH=${PATH}:/usr/sbin:/sbin:/usr/local/sbin
-		export CCACHE_DIR=/var/ccache
-		export CCACHE_LOGFILE=/var/ccache/ccache.log
-		if [ -x /usr/local/bin/ccache ]
-		then
-			/usr/local/bin/ccache -M 5G > /dev/null
-		fi
-		if [ -d /usr/local/FreeBSD/head ]
-		then
-			PATH=${PATH}:/usr/local/FreeBSD/head/Tools/scripts
-		fi
-		if [ $(sysctl -n security.jail.jailed) -eq 1 ]
-		then
-			CHROOT="${ZCLR_yellow}"
-		fi
-	;;
-	Darwin)
-		PATH=${PATH}:/usr/sbin:/usr/bin:/sbin
-		if [ -d ${HOME}/Devel/node ]
-		then
-			PATH=${PATH}:${HOME}/Devel/node/current/bin
-		fi
-		if [ -d /usr/local/texlive/2014/bin/universal-darwin ]
-		then
-			PATH=${PATH}:/usr/local/texlive/2014/bin/universal-darwin
-		fi
-		if [ -d ${HOME}/.homebrew ]
-		then
-			PATH=${PATH}:${HOME}/.homebrew/bin
-		fi
-	;;
+    Linux)
+        PATH=${PATH}:/usr/local/sbin:/usr/sbin:/sbin
+        if [ -f /etc/arch-release ]
+        then
+            LINUX_DISTRO="ArchLinux"
+        elif [ -f /etc/gentoo-release ]
+        then
+            LINUX_DISTRO="Gentoo"
+        else
+            LINUX_DISTRO=""
+        fi
+    ;;
+    FreeBSD)
+        PATH=${PATH}:/usr/sbin:/sbin:/usr/local/sbin
+        export CCACHE_DIR=/var/ccache
+        export CCACHE_LOGFILE=/var/ccache/ccache.log
+        if [ -x /usr/local/bin/ccache ]
+        then
+            /usr/local/bin/ccache -M 5G > /dev/null
+        fi
+        if [ -d /usr/local/FreeBSD/head ]
+        then
+            PATH=${PATH}:/usr/local/FreeBSD/head/Tools/scripts
+        fi
+        if [ $(sysctl -n security.jail.jailed) -eq 1 ]
+        then
+            CHROOT="${ZCLR_yellow}"
+        fi
+    ;;
+    Darwin)
+        PATH=${PATH}:/usr/sbin:/usr/bin:/sbin
+        if [ -d ${HOME}/Devel/node ]
+        then
+            PATH=${PATH}:${HOME}/Devel/node/current/bin
+        fi
+        if [ -d /usr/local/texlive/2014/bin/universal-darwin ]
+        then
+            PATH=${PATH}:/usr/local/texlive/2014/bin/universal-darwin
+        fi
+        if [ -d ${HOME}/.homebrew ]
+        then
+            PATH=${PATH}:${HOME}/.homebrew/bin
+        fi
+    ;;
 esac
 
-if [ -d $HOME/.opt ]
+if [ -d ${HOME}/.opt ]
 then
-	PATH=${PATH}:${HOME}/.opt/bin:${HOME}/.opt/sbin
+    PATH=${PATH}:${HOME}/.opt/bin:${HOME}/.opt/sbin
 fi
 
 PROMPT="${CHROOT}%m:${ZCLR_white}[%(!.${ZCLR_red}.${ZCLR_green})%1~${ZCLR_white}] %(!.${ZCLR_red}.${ZCLR_white})%#> %{$reset_color%}"
 
 #includer *.zsh files from $HOME/.zsh
-including(){
-	for i in $(ls -1 ${HOME}/.zsh/${1}/)
-	do
-		source ${HOME}/.zsh/${1}/${i}
-	done
+including() {
+    for i in $(ls -1 ${HOME}/.zsh/${1}/)
+    do
+        source ${HOME}/.zsh/${1}/${i}
+    done
 }
 
 # sys includes
@@ -141,35 +140,33 @@ including func
 
 if [ ! -z "${DISPLAY}" -a -z "${MC_SID}" -a "${TERM}" != "screen" ]
 then
-	function precmd {
-		
-		local TERMWIDTH
-		(( TERMWIDTH = ${COLUMNS} - 1 ))
+    function precmd {
+        local TERMWIDTH
+        (( TERMWIDTH = ${COLUMNS} - 1 ))
 
-		###
-		# Truncate the path if it's too long.
+        ###
+        # Truncate the path if it's too long.
     
-		PR_FILLBAR=""
-		PR_PWDLEN=""
+        PR_FILLBAR=""
+        PR_PWDLEN=""
     
-		local promptsize=${#${(%):---(%n@%M)---()--}}
-		local pwdsize=${#${(%):-%~}}
+        local promptsize=${#${(%):---(%n@%M)---()--}}
+        local pwdsize=${#${(%):-%~}}
     
-		if [[ "$promptsize + $pwdsize" -gt $TERMWIDTH ]]; then
-			((PR_PWDLEN=$TERMWIDTH - $promptsize))
-		else
-			PR_FILLBAR="\${(l.(($TERMWIDTH - ($promptsize + $pwdsize)))..${PR_HBAR}.)}"
-		fi
-	}
+        if [[ "${promptsize} + ${pwdsize}" -gt ${TERMWIDTH} ]]; then
+            ((PR_PWDLEN=${TERMWIDTH} - ${promptsize}))
+        else
+            PR_FILLBAR="\${(l.((${TERMWIDTH} - (${promptsize} + ${pwdsize})))..${PR_HBAR}.)}"
+        fi
+    }
 
 
-	setopt extended_glob
-	preexec () {
-	if [[ "$TERM" == "screen" ]]
-	then
-		local CMD=${1[(wr)^(*=*|sudo|-*)]}
-		echo -n "\ek$CMD\e\\"
-	fi
-	}
+    setopt extended_glob
+    preexec () {
+    if [[ "${TERM}" == "screen" ]]
+    then
+        local CMD=${1[(wr)^(*=*|sudo|-*)]}
+        echo -n "\ek${CMD}\e\\"
+    fi
+    }
 fi
-

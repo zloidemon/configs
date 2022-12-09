@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# vim: set et sw=4 ts=4:
+
 # use ^V to get bindings
 bindkey '^A' beginning-of-line
 bindkey '^[[H' beginning-of-line
