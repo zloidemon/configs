@@ -39,12 +39,12 @@ function _setup_ssh_config() {
                     echo "${_option} ${_value}" >> ${_SSH_USER_CONFIG_FILE}
                 fi
             done
-            echo "setup ssh configuration completed"
+            echo "[setup] ssh configuration completed"
         else
-            echo "ssh config existed remove file first"
+            echo "[setup] ssh config existed remove file first"
         fi
     else
-        echo "function for extraction not defined"
+        echo "[setup] function for extraction not defined"
     fi
 }
 

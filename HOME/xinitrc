@@ -33,10 +33,10 @@ then
         _X_SYS_RESOURCES=/etc/X11/xinit/.Xresources
         _X_SYS_MODMAP=/etc/X11/xinit/.Xmodmap
     else
-        echo "unknown Linux distro continue loading"
+        echo "[setup] can not load _X resources unknown Linux"
     fi
 else
-    echo "unknown OS ${OSTYPE} continue loading"
+    echo "[setup] can not load _X resources OS ${OSTYPE} is unknown"
 fi
 
 # merge in defaults and keymaps
@@ -48,7 +48,7 @@ do
     then
         continue
     else
-        echo "setting up ${_LOCALE} locale"
+        echo "[setup] setting up ${_LOCALE} locale"
         export LC_ALL=${_LOCALE}
         export LC_CTYPE=${_LOCALE}
 
@@ -135,7 +135,7 @@ function setup_wm() {
     then
         case ${_X_SCREEN_MANAGER} in
             i3) start_wm_i3;;
-            *) echo "window manger ${_X_SCREEN_MANAGER} not found";;
+            *) echo "[setup] window manger ${_X_SCREEN_MANAGER} not found";;
         esac
     fi
 }

@@ -20,19 +20,26 @@ function _setup_scm() {
         then
             local _SCM_FULLNAME="${_SCM_FIRSTNAME} ${_SCM_LASTNAME} <${_SCM_EMAIL}>"
         else
-            echo "SCM settings not defined"
+            echo "[setup] SCM settings not defined"
             return 1
         fi
     else
-        echo "exv not found"
+        echo "[setup] exv not found"
         return 1
     fi
 
+if ! [ -f ${_SCM_CONFIG_MERCURIAL} ]
+then
 cat <<EOF > ${_SCM_CONFIG_MERCURIAL}
 [ui]
 username = ${_SCM_FULLNAME}
 EOF
+else
+    echo "[setup] file ${_SCM_CONFIG_MERCURIAL} already exist"
+fi
 
+if ! [ -f ${_SCM_CONFIG_GIT} ]
+then
 cat <<EOF > ${_SCM_CONFIG_GIT}
 [user]
 	name = ${_SCM_FIRSTNAME} ${_SCM_LASTNAME}
@@ -62,6 +69,9 @@ cat <<EOF > ${_SCM_CONFIG_GIT}
 [init]
 	defaultBranch = master
 EOF
+else
+    echo "[setup] file ${_SCM_CONFIG_GIT} already exist"
+fi
 }
 
 _F_SETUP_SCM=1
