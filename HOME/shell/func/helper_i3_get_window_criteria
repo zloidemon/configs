@@ -1,14 +1,24 @@
+#!/bin/sh
+
 # -*- coding: utf-8 -*-
 # vim: set et sw=4 ts=4:
 
 i3-get-window-criteria() {
-    # Check for xwininfo and xprop
-    for cmd in xwininfo xprop; do
-        if ! which ${cmd} > /dev/null 2>&1; then
-            echo "${cmd}: command not found" >&2
-            exit 1
-        fi
-    done
+    if [ ${_F_SETUP_CHECK_BINARY} -eq 1 ]
+    then
+        # Check for xwininfo and xprop
+        for cmd in xwininfo xprop
+        do
+            if ! _setup_checkbinary ${cmd}
+            then
+                echo "${cmd}: command not found" >&2
+                exit 1
+            fi
+        done
+    else
+        echo "checkbinary not found"
+        exit 1
+    fi
 
     match_int='[0-9][0-9]*'
     match_string='".*"'
