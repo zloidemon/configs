@@ -1,8 +1,9 @@
+#!/bin/sh
+
 # -*- coding: utf-8 -*-
 # vim: set et sw=4 ts=4:
 
-keyload()
-{
+keyload() {
     if [ $# -eq 0 ]
     then
         echo "[keyload]: please write keyname"
