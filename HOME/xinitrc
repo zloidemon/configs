@@ -10,14 +10,12 @@ PATH=${PATH}:${HOME}/.opt/bin:${HOME}/.opt/sbin
 _X_USER_RESOURCES=${HOME}/.Xresources
 _X_USER_MODMAP=${HOME}/.Xmodmap
 
-if [ -f "${HOME}/.zsh/func/extract_xresources_value" ]
+if [ -d "${HOME}/.zsh/func" ]
 then
-    source ${HOME}/.zsh/func/extract_xresources_value
-fi
-
-if [ -f "${HOME}/.zsh/func/checkbinary" ]
-then
-    source ${HOME}/.zsh/func/checkbinary
+    for _setup_file in $(ls -1 ${HOME}/.zsh/func/setup_*)
+    do
+        source ${_setup_file}
+    done
 fi
 
 if [ ${OSTYPE} = "FreeBSD" ]
