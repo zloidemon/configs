@@ -1,9 +1,10 @@
+#!/bin/sh
+
 # -*- coding: utf-8 -*-
 # vim: set et sw=4 ts=4:
 
 function pastebin() {
-    fload()
-    {
+    fload() {
         local _tfile
 
         _tfile=${1}

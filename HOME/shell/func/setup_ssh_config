@@ -14,7 +14,7 @@ function _setup_ssh_config() {
     local _SSH_USER_CONFIG_PATH=${HOME}/.ssh
     local _SSH_USER_CONFIG_FILE=${HOME}/.ssh/config
 
-    if [ ${_F_EXTRACT_XRESOURCES_VALUE} -eq 1 ]
+    if [ ${_F_SETUP_EXV} -eq 1 ]
     then
         if ! [ -f ${_SSH_USER_CONFIG_FILE} ]
         then

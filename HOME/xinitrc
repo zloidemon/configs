@@ -142,7 +142,7 @@ function setup_wm() {
     fi
 }
 
-if [ ${_F_EXTRACT_XRESOURCES_VALUE} -eq 1 ]
+if [ ${_F_SETUP_EXV} -eq 1 ]
 then
     exv() { extract_xresources_value $*; }
 

@@ -20,4 +20,4 @@ function extract_xresources_value() {
     echo ${val}
 }
 
-_F_EXTRACT_XRESOURCES_VALUE=1
+_F_SETUP_EXV=1
