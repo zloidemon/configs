@@ -3,8 +3,8 @@
 # -*- coding: utf-8 -*-
 # vim: set et sw=4 ts=4:
 
-function _checkbinary() {
+function _setup_checkbinary() {
     which ${1} 2> /dev/null > /dev/null
 }
 
-_F_CHECK_BINARY=1
+_F_SETUP_CHECK_BINARY=1

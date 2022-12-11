@@ -84,7 +84,7 @@ function setup_setxkbmap() {
     local _X_KEYBOARD_LAYOUT=${1}
     local _X_KEYBOARD_GRP=${2}
 
-    if _checkbinary setxkbmap
+    if _setup_checkbinary setxkbmap
     then
         exec setxkbmap \
             -layout "${_X_KEYBOARD_LAYOUT}" \
@@ -96,9 +96,9 @@ function setup_xautolock() {
     local _X_SCREEN_LOCKER=${1}
     local _X_SCREEN_LOCK=${2}
 
-    if _checkbinary xautolock
+    if _setup_checkbinary xautolock
     then
-        if _checkbinary ${_X_SCREEN_LOCKER}
+        if _setup_checkbinary ${_X_SCREEN_LOCKER}
         then
             exec xautolock -time ${_X_SCREEN_LOCK} \
                 -locker ${_X_SCREEN_LOCKER} &
@@ -133,7 +133,7 @@ function start_wm_i3() {
 function setup_wm() {
     _X_SCREEN_MANAGER=${1}
 
-    if _checkbinary ${_X_SCREEN_MANAGER}
+    if _setup_checkbinary ${_X_SCREEN_MANAGER}
     then
         case ${_X_SCREEN_MANAGER} in
             i3) start_wm_i3;;
