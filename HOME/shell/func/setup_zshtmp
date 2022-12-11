@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # -*- coding: utf-8 -*-
 # vim: set et sw=4 ts=4:
 
@@ -13,7 +15,7 @@ function zshtmp() {
                 touch ${ZTMP}
             fi
 
-            whichtest(){
+            whichtest() {
                 which ${1} 2> /dev/null > /dev/null
             }
 

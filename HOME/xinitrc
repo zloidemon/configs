@@ -10,14 +10,12 @@ PATH=${PATH}:${HOME}/.opt/bin:${HOME}/.opt/sbin
 _X_USER_RESOURCES=${HOME}/.Xresources
 _X_USER_MODMAP=${HOME}/.Xmodmap
 
-if [ -f "${HOME}/.zsh/func/extract_xresources_value" ]
+if [ -d "${HOME}/.zsh/func" ]
 then
-    source ${HOME}/.zsh/func/extract_xresources_value
-fi
-
-if [ -f "${HOME}/.zsh/func/checkbinary" ]
-then
-    source ${HOME}/.zsh/func/checkbinary
+    for _setup_file in $(ls -1 ${HOME}/.zsh/func/setup_*)
+    do
+        source ${_setup_file}
+    done
 fi
 
 if [ ${OSTYPE} = "FreeBSD" ]
@@ -35,10 +33,10 @@ then
         _X_SYS_RESOURCES=/etc/X11/xinit/.Xresources
         _X_SYS_MODMAP=/etc/X11/xinit/.Xmodmap
     else
-        echo "unknown Linux distro continue loading"
+        echo "[setup] can not load _X resources unknown Linux"
     fi
 else
-    echo "unknown OS ${OSTYPE} continue loading"
+    echo "[setup] can not load _X resources OS ${OSTYPE} is unknown"
 fi
 
 # merge in defaults and keymaps
@@ -50,7 +48,7 @@ do
     then
         continue
     else
-        echo "setting up ${_LOCALE} locale"
+        echo "[setup] setting up ${_LOCALE} locale"
         export LC_ALL=${_LOCALE}
         export LC_CTYPE=${_LOCALE}
 
@@ -84,7 +82,7 @@ function setup_setxkbmap() {
     local _X_KEYBOARD_LAYOUT=${1}
     local _X_KEYBOARD_GRP=${2}
 
-    if _checkbinary setxkbmap
+    if _setup_checkbinary setxkbmap
     then
         exec setxkbmap \
             -layout "${_X_KEYBOARD_LAYOUT}" \
@@ -96,9 +94,9 @@ function setup_xautolock() {
     local _X_SCREEN_LOCKER=${1}
     local _X_SCREEN_LOCK=${2}
 
-    if _checkbinary xautolock
+    if _setup_checkbinary xautolock
     then
-        if _checkbinary ${_X_SCREEN_LOCKER}
+        if _setup_checkbinary ${_X_SCREEN_LOCKER}
         then
             exec xautolock -time ${_X_SCREEN_LOCK} \
                 -locker ${_X_SCREEN_LOCKER} &
@@ -133,16 +131,16 @@ function start_wm_i3() {
 function setup_wm() {
     _X_SCREEN_MANAGER=${1}
 
-    if _checkbinary ${_X_SCREEN_MANAGER}
+    if _setup_checkbinary ${_X_SCREEN_MANAGER}
     then
         case ${_X_SCREEN_MANAGER} in
             i3) start_wm_i3;;
-            *) echo "window manger ${_X_SCREEN_MANAGER} not found";;
+            *) echo "[setup] window manger ${_X_SCREEN_MANAGER} not found";;
         esac
     fi
 }
 
-if [ ${_F_EXTRACT_XRESOURCES_VALUE} -eq 1 ]
+if [ ${_F_SETUP_EXV} -eq 1 ]
 then
     exv() { extract_xresources_value $*; }
 
@@ -157,6 +155,18 @@ then
         $(exv screen.x.lock)
 
     setup_wm $(exv screen.x.manager)
+fi
+
+# Setup extra
+
+if [ ${_F_SETUP_SSH_CONFIG} -eq 1 ]
+then
+    _setup_ssh_config
+fi
+
+if [ ${_F_SETUP_SCM} -eq 1 ]
+then
+    _setup_scm
 fi
 
 # start some nice programs

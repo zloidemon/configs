@@ -1,0 +1,77 @@
+#!/bin/sh
+
+# -*- coding: utf-8 -*-
+# vim: set et sw=4 ts=4:
+
+function _setup_scm() {
+    local _SCM_CONFIG_MERCURIAL=${HOME}/.hgrc
+    local _SCM_CONFIG_GIT=${HOME}/.gitconfig
+    local _X_USER_RESOURCES=${HOME}/.Xresources
+
+    if [ ${_F_SETUP_EXV} -eq 1 ]
+    then
+        local _SCM_FIRSTNAME=$(extract_xresources_value scm.firstname)
+        local _SCM_LASTNAME=$(extract_xresources_value scm.lastname)
+        local _SCM_EMAIL=$(extract_xresources_value scm.email)
+
+        if [ "x${_SCM_FIRSTNAME}" != "x" ] && \
+            [ "x${_SCM_LASTNAME}" != "x" ] && \
+			[ "x${_SCM_EMAIL}" != "x" ]
+        then
+            local _SCM_FULLNAME="${_SCM_FIRSTNAME} ${_SCM_LASTNAME} <${_SCM_EMAIL}>"
+        else
+            echo "[setup] SCM settings not defined"
+            return 1
+        fi
+    else
+        echo "[setup] exv not found"
+        return 1
+    fi
+
+if ! [ -f ${_SCM_CONFIG_MERCURIAL} ]
+then
+cat <<EOF > ${_SCM_CONFIG_MERCURIAL}
+[ui]
+username = ${_SCM_FULLNAME}
+EOF
+else
+    echo "[setup] file ${_SCM_CONFIG_MERCURIAL} already exist"
+fi
+
+if ! [ -f ${_SCM_CONFIG_GIT} ]
+then
+cat <<EOF > ${_SCM_CONFIG_GIT}
+[user]
+	name = ${_SCM_FIRSTNAME} ${_SCM_LASTNAME}
+	email = ${_SCM_EMAIL}
+[pull]
+	rebase = false
+[color]
+	ui = true
+	branch = auto
+	diff = auto
+	status = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = cyan
+	frag = magenta
+	old = cyan
+	new = yellow
+[color "status"]
+	added = green
+	changed = yellow
+	untracked = yellow
+[diff "sopsdiffer"]
+	textconv = sops -d
+[init]
+	defaultBranch = master
+EOF
+else
+    echo "[setup] file ${_SCM_CONFIG_GIT} already exist"
+fi
+}
+
+_F_SETUP_SCM=1

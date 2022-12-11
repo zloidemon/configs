@@ -1,9 +1,7 @@
+#!/bin/sh
+
 # -*- coding: utf-8 -*-
 # vim: set et sw=4 ts=4:
-
-if [ ${OSTYPE} != 'Darwin' ];then
-    ZHELP_DEP=${ZHELP_DEP}" scrot"
-fi
 
 function upscreen() {
     DATE=$(date '+%Y-%m-%d_%H:%M:%S')
@@ -33,5 +31,5 @@ function upscreen() {
         scrot -b -q 0 ${DSCS}/${SCREEN}
     fi
 
-    uppic ${DSCS}/${SCREEN}
+    echo 'FIXME: add support to upload file somewhere'
 }

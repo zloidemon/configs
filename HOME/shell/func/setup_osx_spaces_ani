@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # -*- coding: utf-8 -*-
 # vim: set et sw=4 ts=4:
 
@@ -9,13 +11,13 @@ function spaces_ani() {
     n|no)
         defaults delete com.apple.dock workspaces-swoosh-animation-off && killall Dock;;
     *)
-        echo "Disable Spaces workspace change animation.\nuse:\tyes\n\tno"
+        echo "[setup] disable Spaces workspace change animation.\nuse:\tyes\n\tno"
         if defaults read com.apple.dock workspaces-swoosh-animation-off 2> /dev/null >/dev/null
         then
             SPACES_AN_STATUS="disabled"
         else
             SPACES_AN_STATUS="enabled"
         fi
-        echo Animations: ${SPACES_AN_STATUS} ;;
+        echo "[setup] animations: ${SPACES_AN_STATUS}" ;;
     esac
 }

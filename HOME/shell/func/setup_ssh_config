@@ -1,0 +1,51 @@
+#!/bin/sh
+
+# -*- coding: utf-8 -*-
+# vim: set et sw=4 ts=4:
+
+function _setup_ssh_config() {
+    local _options="
+        ConnectTimeout
+        ForwardAgent
+        HashKnownHosts
+        ServerAliveInterval
+    "
+
+    local _SSH_USER_CONFIG_PATH=${HOME}/.ssh
+    local _SSH_USER_CONFIG_FILE=${HOME}/.ssh/config
+    local _X_USER_RESOURCES=${HOME}/.Xresources
+
+    if [ ${_F_SETUP_EXV} -eq 1 ]
+    then
+        if ! [ -f ${_SSH_USER_CONFIG_FILE} ]
+        then
+            if ! [ -d ${_SSH_USER_CONFIG_PATH} ]
+            then
+                mkdir ${_SSH_USER_CONFIG_PATH}
+                chmod 700 ${_SSH_USER_CONFIG_PATH}
+            fi
+
+            touch ${_SSH_USER_CONFIG_FILE}
+            chmod 644 ${_SSH_USER_CONFIG_FILE}
+
+            for _option in $(echo ${_options})
+            do
+                local _value=$( \
+                    extract_xresources_value \
+                    ssh.global.option.${_option} \
+                )
+                if [ "x${_value}" != "x" ]
+                then
+                    echo "${_option} ${_value}" >> ${_SSH_USER_CONFIG_FILE}
+                fi
+            done
+            echo "[setup] ssh configuration completed"
+        else
+            echo "[setup] ssh config existed remove file first"
+        fi
+    else
+        echo "[setup] function for extraction not defined"
+    fi
+}
+
+_F_SETUP_SSH_CONFIG=1
