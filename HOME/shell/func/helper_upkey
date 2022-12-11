@@ -20,7 +20,7 @@ function upkey() {
             if [ -f "${key}" -a -n "${key}" ]
             then
                 KEYCODE=$(cat ${KEY})
-                ssh -p $PORT -q $1 "test -d ~/.ssh || mkdir ~/.ssh && chmod 700 ~/.ssh; echo "${KEYCODE}" >> ~/.ssh/authorized_keys; chmod 644 ~/.ssh/authorized_keys"
+                ssh -p ${PORT} -q ${1} "test -d ~/.ssh || mkdir ~/.ssh && chmod 700 ~/.ssh; echo "${KEYCODE}" >> ~/.ssh/authorized_keys; chmod 644 ~/.ssh/authorized_keys"
             else
                 echo ${KEY} not found
             fi
