@@ -1,6 +1,8 @@
 [user]
 	name = Veniamin Gvozdikov
 	email = g.veniamin@googlemail.com
+[pull]
+	rebase = false
 [color]
 	ui = true
 	branch = auto
@@ -19,5 +21,7 @@
 	added = green
 	changed = yellow
 	untracked = yellow
+[diff "sopsdiffer"]
+	textconv = sops -d
 [init]
 	defaultBranch = master
