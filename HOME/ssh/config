@@ -1,9 +1,0 @@
-HashKnownHosts no
-ForwardAgent yes
-ConnectTimeout 100
-ServerAliveInterval 60
-SetEnv VIM_COLOR=desert
-
-Host 10.*
-   StrictHostKeyChecking no
-   UserKnownHostsFile=/dev/null
