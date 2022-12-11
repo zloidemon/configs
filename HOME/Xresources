@@ -59,3 +59,6 @@ User.ssh.global.option.HashKnownHosts: no
 User.ssh.global.option.ForwardAgent: yes
 User.ssh.global.option.ConnectTimeout: 100
 User.ssh.global.option.ServerAliveInterval: 60
+User.scm.firstname: Veniamin
+User.scm.lastname: Gvozdikov
+User.scm.email: g.veniamin@googlemail.com

@@ -157,6 +157,18 @@ then
     setup_wm $(exv screen.x.manager)
 fi
 
+# Setup extra
+
+if [ ${_F_SETUP_SSH_CONFIG} -eq 1 ]
+then
+    _setup_ssh_config
+fi
+
+if [ ${_F_SETUP_SCM} -eq 1 ]
+then
+    _setup_scm
+fi
+
 # start some nice programs
 
 #xscreensaver -lock-timeout 3 &
