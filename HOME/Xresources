@@ -40,6 +40,7 @@ User.screen.x.lock: 10
 User.screen.x.locker: slock
 User.screen.scale: 0.75
 User.i3.socket: i3.socket
+User.texlive.texmfhome: .texmf
 User.java.options: -Dawt.useSystemAAFontSettings=on
 User.java.awt.wm.nonreparenting: 1
 User.java.awt.toolkit: MToolkit

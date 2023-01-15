@@ -115,6 +115,13 @@ function setup_exports() {
     export _JAVA_AWT_WM_NONREPARENTING=$(exv java.awt.wm.nonreparenting)
     export AWT_TOOLKIT=$(exv java.awt.toolkit)
 
+    # Setup TeX settings
+    export TEXMFHOME=${HOME}/$(exv texlive.texmfhome)
+    if ! [ -d ${TEXMFHOME} ]
+    then
+        mkdir -p ${TEXMFHOME}
+    fi
+
     # Setup Android
     export ANDROID_HOME=$(exv android.home)
     if [ "x${ANDROID_HOME}" != "x" ]
