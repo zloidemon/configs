@@ -48,6 +48,7 @@ User.system.timezone: Europe/Moscow
 User.system.keyboard.layout: us,ru
 User.system.keyboard.grp: caps_toggle
 User.android.home: /opt/android-sdk
+User.gnat.home: /opt/gnatstudio
 User.ssh.global.option.HashKnownHosts: no
 User.ssh.global.option.ForwardAgent: yes
 User.ssh.global.option.ConnectTimeout: 100
