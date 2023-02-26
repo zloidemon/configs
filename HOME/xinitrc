@@ -108,7 +108,7 @@ function setup_xautolock() {
 
 function setup_exports() {
     export TZ=$(exv system.timezone)
-    export QT_SCALE_FACTOR=$(exv screen.scale)
+    #export QT_SCALE_FACTOR=$(exv screen.scale)
 
     # Setup Java options
     export _JAVA_OPTIONS=$(exv java.options)
