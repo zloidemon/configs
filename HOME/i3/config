@@ -198,4 +198,4 @@ bar {
 # exec --no-startup-id nm-applet
 # exec i3-config-wizard
 exec --no-startup-id nm-applet
-exec QT_SCALE_FACTOR=0 flameshot
+exec flameshot
